@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */; };
 		B9D75E981CADB13100D7AEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */; };
 		B9D75E9D1CADB13100D7AEB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */; };
 		B9D75E9F1CADB13100D7AEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9D75E9E1CADB13100D7AEB3 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		B9D75E941CADB13100D7AEB3 /* pec-uno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pec-uno.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9D75E9C1CADB13100D7AEB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				B9D75EA91CADB4C100D7AEB3 /* LoginViewController.swift */,
+				B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */,
 				B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */,
 				B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */,
 				B9D75E9E1CADB13100D7AEB3 /* Assets.xcassets */,
@@ -715,6 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */,
 				B9D75EAA1CADB4C100D7AEB3 /* LoginViewController.swift in Sources */,
 				B9D75E981CADB13100D7AEB3 /* AppDelegate.swift in Sources */,
 			);
