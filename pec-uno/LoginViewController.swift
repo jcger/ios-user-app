@@ -78,21 +78,21 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginAction(sender: AnyObject) {
         self.startIndicator()
-//        
-//        backendless.userService.login(
-//            userNameTextField.text, password: pwdTextField.text,
-//            response: { (let registeredUser : BackendlessUser!) -> () in
-//                self.stopIndicator()
-//                print("User has been logged in (ASYNC): \(registeredUser)")
-//            },
-//            error: { (let fault : Fault!) -> () in
-//                self.stopIndicator()
-//                print("Server reported an error: \(fault)")
-//                self.clearForm()
-//                self.showAlert("Error", msg: "Incorrect credentials")
-//                
-//            }
-//        )
+        
+        backendless.userService.login(
+            userNameTextField.text, password: pwdTextField.text,
+            response: { (let registeredUser : BackendlessUser!) -> () in
+                print("User has been logged in (ASYNC): \(registeredUser)")
+                self.stopIndicator()
+            },
+            error: { (let fault : Fault!) -> () in
+                print("Server reported an error: \(fault)")
+                self.stopIndicator()
+                self.clearForm()
+                self.showAlert("Error", msg: "Incorrect credentials")
+                
+            }
+        )
     }
 
 }
