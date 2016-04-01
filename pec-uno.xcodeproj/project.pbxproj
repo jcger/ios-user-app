@@ -876,6 +876,7 @@
 				B9D75EA81CADB13100D7AEB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
