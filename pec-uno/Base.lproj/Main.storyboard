@@ -91,6 +91,9 @@
                             <rect key="frame" x="0.0" y="403" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Register"/>
+                            <connections>
+                                <action selector="register:" destination="SRE-Ql-iAo" eventType="touchUpInside" id="JCV-IT-K5M"/>
+                            </connections>
                         </button>
                         <sections>
                             <tableViewSection headerTitle="Create Account" id="Tls-Fg-nAl">
@@ -118,12 +121,12 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="yoS-sj-anb" firstAttribute="trailing" secondItem="LC4-YZ-TSt" secondAttribute="trailingMargin" id="5ip-WZ-btL"/>
                                                 <constraint firstItem="uPz-B1-Yeq" firstAttribute="top" secondItem="yoS-sj-anb" secondAttribute="bottom" constant="8" symbolic="YES" id="APD-R7-9Gd"/>
-                                                <constraint firstItem="yoS-sj-anb" firstAttribute="top" secondItem="LC4-YZ-TSt" secondAttribute="top" id="W9b-h4-1qa"/>
-                                                <constraint firstItem="uPz-B1-Yeq" firstAttribute="leading" secondItem="LC4-YZ-TSt" secondAttribute="leadingMargin" id="mBI-bq-2VL"/>
+                                                <constraint firstItem="uPz-B1-Yeq" firstAttribute="trailing" secondItem="LC4-YZ-TSt" secondAttribute="trailingMargin" id="H8w-IW-Tc2"/>
+                                                <constraint firstItem="yoS-sj-anb" firstAttribute="top" secondItem="LC4-YZ-TSt" secondAttribute="top" id="oZ3-Bs-A2e"/>
                                                 <constraint firstItem="uPz-B1-Yeq" firstAttribute="leading" secondItem="yoS-sj-anb" secondAttribute="leading" id="to2-KF-Sou"/>
                                                 <constraint firstItem="yoS-sj-anb" firstAttribute="trailing" secondItem="uPz-B1-Yeq" secondAttribute="trailing" id="wDn-Kt-e49"/>
+                                                <constraint firstItem="uPz-B1-Yeq" firstAttribute="leading" secondItem="LC4-YZ-TSt" secondAttribute="leadingMargin" id="zDD-37-H1v"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -150,12 +153,12 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="jkS-b3-SFp" firstAttribute="leading" secondItem="9wg-Tg-YaY" secondAttribute="leadingMargin" id="4Lq-gh-QYD"/>
                                                 <constraint firstItem="SJo-DD-Nmi" firstAttribute="top" secondItem="jkS-b3-SFp" secondAttribute="bottom" constant="8" symbolic="YES" id="5CE-sr-eVJ"/>
-                                                <constraint firstItem="jkS-b3-SFp" firstAttribute="top" secondItem="9wg-Tg-YaY" secondAttribute="topMargin" id="DSo-k3-xNC"/>
+                                                <constraint firstItem="jkS-b3-SFp" firstAttribute="top" secondItem="9wg-Tg-YaY" secondAttribute="topMargin" id="Hsc-7M-dkw"/>
+                                                <constraint firstItem="jkS-b3-SFp" firstAttribute="trailing" secondItem="9wg-Tg-YaY" secondAttribute="trailingMargin" id="J2x-kR-xqy"/>
                                                 <constraint firstItem="jkS-b3-SFp" firstAttribute="trailing" secondItem="SJo-DD-Nmi" secondAttribute="trailing" id="Oz5-Sl-qfn"/>
                                                 <constraint firstItem="jkS-b3-SFp" firstAttribute="leading" secondItem="SJo-DD-Nmi" secondAttribute="leading" id="PR3-km-Ul5"/>
-                                                <constraint firstItem="jkS-b3-SFp" firstAttribute="trailing" secondItem="9wg-Tg-YaY" secondAttribute="trailingMargin" id="ePT-r8-Xih"/>
+                                                <constraint firstItem="jkS-b3-SFp" firstAttribute="leading" secondItem="9wg-Tg-YaY" secondAttribute="leadingMargin" id="fbV-oH-EFC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -182,10 +185,10 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="961-K6-mKU" firstAttribute="top" secondItem="irD-0G-vSR" secondAttribute="topMargin" id="7qE-ol-N6u"/>
-                                                <constraint firstItem="aT5-ba-1kz" firstAttribute="trailing" secondItem="irD-0G-vSR" secondAttribute="trailingMargin" id="GTl-TO-V7K"/>
+                                                <constraint firstItem="961-K6-mKU" firstAttribute="trailing" secondItem="irD-0G-vSR" secondAttribute="trailingMargin" id="DM3-Ct-pKE"/>
+                                                <constraint firstItem="961-K6-mKU" firstAttribute="top" secondItem="irD-0G-vSR" secondAttribute="topMargin" id="PIe-Tv-aUA"/>
                                                 <constraint firstItem="961-K6-mKU" firstAttribute="trailing" secondItem="aT5-ba-1kz" secondAttribute="trailing" id="Pbr-IO-fja"/>
-                                                <constraint firstItem="aT5-ba-1kz" firstAttribute="leading" secondItem="irD-0G-vSR" secondAttribute="leadingMargin" id="e0e-Cd-FHd"/>
+                                                <constraint firstItem="961-K6-mKU" firstAttribute="leading" secondItem="irD-0G-vSR" secondAttribute="leadingMargin" id="V1I-OJ-ZLu"/>
                                                 <constraint firstItem="aT5-ba-1kz" firstAttribute="top" secondItem="961-K6-mKU" secondAttribute="bottom" constant="8" symbolic="YES" id="k0H-1x-9jh"/>
                                                 <constraint firstItem="aT5-ba-1kz" firstAttribute="leading" secondItem="961-K6-mKU" secondAttribute="leading" id="z91-ll-QDn"/>
                                             </constraints>
@@ -214,12 +217,12 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Iyv-mb-p0T" firstAttribute="top" secondItem="kDt-ZV-iTb" secondAttribute="topMargin" id="1AA-AQ-5LR"/>
+                                                <constraint firstItem="o1G-d7-a93" firstAttribute="trailing" secondItem="kDt-ZV-iTb" secondAttribute="trailingMargin" id="043-Uo-748"/>
                                                 <constraint firstItem="o1G-d7-a93" firstAttribute="top" secondItem="Iyv-mb-p0T" secondAttribute="bottom" constant="8" symbolic="YES" id="6BA-Vl-1Wk"/>
                                                 <constraint firstItem="Iyv-mb-p0T" firstAttribute="leading" secondItem="o1G-d7-a93" secondAttribute="leading" id="Gs8-ZS-1ha"/>
-                                                <constraint firstItem="Iyv-mb-p0T" firstAttribute="trailing" secondItem="kDt-ZV-iTb" secondAttribute="trailingMargin" id="Mqp-JQ-4ah"/>
-                                                <constraint firstItem="Iyv-mb-p0T" firstAttribute="leading" secondItem="kDt-ZV-iTb" secondAttribute="leadingMargin" id="NY8-v0-NWi"/>
+                                                <constraint firstItem="o1G-d7-a93" firstAttribute="leading" secondItem="kDt-ZV-iTb" secondAttribute="leadingMargin" id="QMU-x2-gxn"/>
                                                 <constraint firstItem="Iyv-mb-p0T" firstAttribute="trailing" secondItem="o1G-d7-a93" secondAttribute="trailing" id="R29-fK-Heg"/>
+                                                <constraint firstItem="Iyv-mb-p0T" firstAttribute="top" secondItem="kDt-ZV-iTb" secondAttribute="topMargin" id="n1N-uH-WFc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -246,12 +249,12 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="2nq-83-QqN" firstAttribute="top" secondItem="8CG-s7-Orb" secondAttribute="topMargin" id="4Ap-kW-xlb"/>
+                                                <constraint firstItem="2nq-83-QqN" firstAttribute="leading" secondItem="8CG-s7-Orb" secondAttribute="leadingMargin" id="9Zi-4x-Fwn"/>
                                                 <constraint firstItem="K2J-XK-WgA" firstAttribute="top" secondItem="2nq-83-QqN" secondAttribute="bottom" constant="8" symbolic="YES" id="Oc3-2T-2Wr"/>
-                                                <constraint firstItem="K2J-XK-WgA" firstAttribute="leading" secondItem="8CG-s7-Orb" secondAttribute="leadingMargin" id="WfQ-u8-aJ3"/>
+                                                <constraint firstItem="2nq-83-QqN" firstAttribute="top" secondItem="8CG-s7-Orb" secondAttribute="topMargin" id="clh-bu-WXQ"/>
                                                 <constraint firstItem="K2J-XK-WgA" firstAttribute="trailing" secondItem="2nq-83-QqN" secondAttribute="trailing" id="pHd-Fv-FaC"/>
-                                                <constraint firstItem="2nq-83-QqN" firstAttribute="trailing" secondItem="8CG-s7-Orb" secondAttribute="trailingMargin" id="uj8-es-maN"/>
                                                 <constraint firstItem="K2J-XK-WgA" firstAttribute="leading" secondItem="2nq-83-QqN" secondAttribute="leading" id="vtv-P4-ufs"/>
+                                                <constraint firstItem="2nq-83-QqN" firstAttribute="trailing" secondItem="8CG-s7-Orb" secondAttribute="trailingMargin" id="xTv-zk-UcB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -268,7 +271,6 @@
                         <outlet property="fullName" destination="SJo-DD-Nmi" id="Rxe-rR-OCg"/>
                         <outlet property="pwd" destination="o1G-d7-a93" id="nnA-Nw-jWQ"/>
                         <outlet property="pwdRepeat" destination="K2J-XK-WgA" id="rmo-tz-1Qn"/>
-                        <outlet property="register" destination="1Bj-g9-DNp" id="PnQ-N7-MGh"/>
                         <outlet property="username" destination="uPz-B1-Yeq" id="P7y-PM-sRf"/>
                     </connections>
                 </tableViewController>

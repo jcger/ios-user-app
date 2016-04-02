@@ -15,10 +15,17 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pwd: UITextField!
     @IBOutlet weak var pwdRepeat: UITextField!
-    @IBOutlet weak var register: UIButton!
+    
+    enum InputError: ErrorType {
+        case inputMissing
+        case pwdNotEqual
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //to avoid this view to overlap with the status bar
+        self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
         
         initDelegates()
     }
@@ -42,17 +49,37 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
 
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        print("OMG")
-        
         switch textField {
-        case username: fullName.becomeFirstResponder()
-        case fullName: email.becomeFirstResponder()
-        case email: pwd.becomeFirstResponder()
-        case pwd: pwdRepeat.becomeFirstResponder()
-        default: textField.resignFirstResponder()
+            case username: fullName.becomeFirstResponder()
+            case fullName: email.becomeFirstResponder()
+            case email: pwd.becomeFirstResponder()
+            case pwd: pwdRepeat.becomeFirstResponder()
+            default: textField.resignFirstResponder()
         }
         
         return false
-        
+    }
+    
+    @IBAction func register(sender: AnyObject) {
+        let backendless = Backendless.sharedInstance()
+        let user: BackendlessUser = BackendlessUser()
+        user.email = email.text
+        user.name = username.text
+        user.password = pwd.text
+        user.setProperty("fullName", object: fullName.text)
+
+        backendless.userService.registering(
+            user,
+            response: { (let registeredUser : BackendlessUser!) -> () in
+                print("User has been logged in (ASYNC): \(registeredUser)")
+//                self.stopIndicator()
+            },
+            error: { (let fault : Fault!) -> () in
+                print("Server reported an error: \(fault)")
+//                self.stopIndicator()
+                
+            }
+        )
+
     }
 }
