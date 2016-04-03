@@ -9,6 +9,11 @@
 import Foundation
 
 public class Alert: UIAlertController  {
+    
+    public convenience init(title: String?, message: String?) {
+        self.init()
+        self.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    }
 
     public func showSimple(viewController: UIViewController) {
         self.modalPresentationStyle = .Popover

@@ -39,11 +39,6 @@ class LoginViewController: UIViewController {
         self.pwdTextField.text = nil;
     }
     
-    private func showAlert() {
-        let alert = PecUtils.Alert(title: "Error", message: "Incorrect credentials", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.showSimple(self)
-    }
-    
      
     /*
         Called when user clicks on submit
@@ -62,7 +57,8 @@ class LoginViewController: UIViewController {
                 print("Server reported an error: \(fault)")
                 self.indicator.hide()
                 self.clearForm()
-                self.showAlert()
+                PecUtils.Alert(title: "Error", message: "Incorrect credentials")
+                    .showSimple(self)
             }
         )
     }
