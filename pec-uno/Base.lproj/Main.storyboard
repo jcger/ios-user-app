@@ -95,7 +95,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Bj-g9-DNp">
-                            <rect key="frame" x="0.0" y="439" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="490" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Create Account"/>
                             <connections>
@@ -265,6 +265,40 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="7Jh-M7-ZRl">
+                                        <rect key="frame" x="0.0" y="439" width="600" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Jh-M7-ZRl" id="ajg-bj-6Hv">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="51"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By clicking on create account you are agreeing to the " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t4-dw-hx2">
+                                                    <rect key="frame" x="8" y="0.0" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJ7-bf-SgI">
+                                                    <rect key="frame" x="8" y="16" width="584" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <state key="normal" title="Terms and Conditions"/>
+                                                    <connections>
+                                                        <segue destination="Gvy-1a-3dw" kind="show" id="wxF-m3-tKw"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3t4-dw-hx2" firstAttribute="leading" secondItem="ajg-bj-6Hv" secondAttribute="leadingMargin" id="0O5-2T-8Y7"/>
+                                                <constraint firstItem="iJ7-bf-SgI" firstAttribute="trailing" secondItem="3t4-dw-hx2" secondAttribute="trailing" id="BNo-P9-j96"/>
+                                                <constraint firstItem="3t4-dw-hx2" firstAttribute="top" secondItem="ajg-bj-6Hv" secondAttribute="top" id="LLd-mp-Few"/>
+                                                <constraint firstItem="iJ7-bf-SgI" firstAttribute="top" secondItem="ajg-bj-6Hv" secondAttribute="topMargin" constant="8" id="Zzy-2g-56H"/>
+                                                <constraint firstItem="iJ7-bf-SgI" firstAttribute="leading" secondItem="3t4-dw-hx2" secondAttribute="leading" id="mNC-ep-JE6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="3t4-dw-hx2" secondAttribute="bottom" constant="22" id="pVj-Gt-Blg"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="iJ7-bf-SgI" secondAttribute="bottom" constant="-3" id="sfk-TB-ERU"/>
+                                                <constraint firstItem="3t4-dw-hx2" firstAttribute="trailing" secondItem="ajg-bj-6Hv" secondAttribute="trailingMargin" id="skc-9c-4wf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -283,7 +317,39 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Hc-8H-RqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="861" y="430"/>
+            <point key="canvasLocation" x="862" y="430"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="erI-pL-ACe">
+            <objects>
+                <viewController id="Gvy-1a-3dw" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="45Z-l9-YIF"/>
+                        <viewControllerLayoutGuide type="bottom" id="qRB-rl-MpU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BO6-pw-mDV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Best Term and Conditions ever! " textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbj-Kv-uTV">
+                                <rect key="frame" x="20" y="72" width="560" height="508"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Vbj-Kv-uTV" secondAttribute="bottom" constant="20" symbolic="YES" id="Kb7-Ui-X5S"/>
+                            <constraint firstItem="Vbj-Kv-uTV" firstAttribute="leading" secondItem="BO6-pw-mDV" secondAttribute="leadingMargin" id="dfh-ln-Hhn"/>
+                            <constraint firstItem="Vbj-Kv-uTV" firstAttribute="top" secondItem="45Z-l9-YIF" secondAttribute="bottom" constant="8" symbolic="YES" id="fXq-Y7-Tdx"/>
+                            <constraint firstItem="Vbj-Kv-uTV" firstAttribute="trailing" secondItem="BO6-pw-mDV" secondAttribute="trailingMargin" id="qaG-lr-aK5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JxZ-8Q-Gzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1525" y="430"/>
         </scene>
     </scenes>
 </document>
