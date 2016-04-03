@@ -68,18 +68,14 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         user.password = pwd.text
         user.setProperty("fullName", object: fullName.text)
 
-        backendless.userService.registering(
-            user,
-            response: { (let registeredUser : BackendlessUser!) -> () in
-                print("User has been logged in (ASYNC): \(registeredUser)")
-//                self.stopIndicator()
-            },
-            error: { (let fault : Fault!) -> () in
-                print("Server reported an error: \(fault)")
-//                self.stopIndicator()
-                
-            }
-        )
+        backendless.userService.registering(user, response: { (registeredUser) -> Void in
+            let email = registeredUser.email
+            print("Usuario \(email) registrado correctamente") },
+            error: { (error) -> Void in
+                // Código en caso de error en el registro
+                let message = error.message
+                print("Error registrando al usuario: \(message)")
+            })
 
     }
 }
