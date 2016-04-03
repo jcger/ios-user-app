@@ -30,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PecUtils.xcodeproj; path = lib/PecUtils/PecUtils.xcodeproj; sourceTree = "<group>"; };
 		B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		B9D75E941CADB13100D7AEB3 /* pec-uno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pec-uno.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -252,6 +253,7 @@
 		B9D75E8B1CADB13100D7AEB3 = {
 			isa = PBXGroup;
 			children = (
+				B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */,
 				B9D75F881CADBA8400D7AEB3 /* lib */,
 				B9D75EAF1CADB99100D7AEB3 /* libz.tbd */,
 				B9D75EAD1CADB98B00D7AEB3 /* libsqlite3.tbd */,

@@ -47,7 +47,10 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         pwdRepeat.delegate = self
     }
 
-    
+    /*
+        Function called on keyboards 'next' click
+        Sets focus on the next text field
+    */
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         switch textField {
             case username: fullName.becomeFirstResponder()
@@ -60,6 +63,11 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         return false
     }
     
+    /*
+        Called on 'create account' click
+        Does API register request with user data
+        Promps an error if needed
+    */
     @IBAction func register(sender: AnyObject) {
         let backendless = Backendless.sharedInstance()
         let user: BackendlessUser = BackendlessUser()
