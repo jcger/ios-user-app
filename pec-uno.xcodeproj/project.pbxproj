@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B97C514D1CB2F08600D18BBA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */; };
+		B97C51591CB3013600D18BBA /* batman.png in Resources */ = {isa = PBXBuildFile; fileRef = B97C51581CB3013600D18BBA /* batman.png */; };
 		B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */; };
 		B9D75E981CADB13100D7AEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */; };
 		B9D75E9D1CADB13100D7AEB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */; };
@@ -29,7 +31,19 @@
 		B9D7605E1CADBA8500D7AEB3 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D760531CADBA8500D7AEB3 /* libx264.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B97C514A1CB2D1BA00D18BBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B9CAE79D1CB1248A00D215E6;
+			remoteInfo = PecUtils;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B97C51581CB3013600D18BBA /* batman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = batman.png; sourceTree = "<group>"; };
 		B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PecUtils.xcodeproj; path = lib/PecUtils/PecUtils.xcodeproj; sourceTree = "<group>"; };
 		B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		B9D75E941CADB13100D7AEB3 /* pec-uno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pec-uno.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,16 +264,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B9D75E8B1CADB13100D7AEB3 = {
+		B97C51471CB2D1B900D18BBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B97C514B1CB2D1BA00D18BBA /* PecUtils.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B97C514E1CB2FDC100D18BBA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B97C51581CB3013600D18BBA /* batman.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		B97C514F1CB2FDCD00D18BBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9D75E8B1CADB13100D7AEB3 = {
+			isa = PBXGroup;
+			children = (
 				B9D75F881CADBA8400D7AEB3 /* lib */,
 				B9D75EAF1CADB99100D7AEB3 /* libz.tbd */,
 				B9D75EAD1CADB98B00D7AEB3 /* libsqlite3.tbd */,
 				B9D75EAB1CADB98100D7AEB3 /* SystemConfiguration.framework */,
 				B9D75E961CADB13100D7AEB3 /* pec-uno */,
 				B9D75E951CADB13100D7AEB3 /* Products */,
+				B97C514F1CB2FDCD00D18BBA /* Frameworks */,
+				B97C514E1CB2FDC100D18BBA /* Images */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +315,7 @@
 			children = (
 				B9D75EA91CADB4C100D7AEB3 /* LoginViewController.swift */,
 				B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */,
+				B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */,
 				B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */,
 				B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */,
 				B9D75E9E1CADB13100D7AEB3 /* Assets.xcassets */,
@@ -695,12 +735,28 @@
 			mainGroup = B9D75E8B1CADB13100D7AEB3;
 			productRefGroup = B9D75E951CADB13100D7AEB3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B97C51471CB2D1B900D18BBA /* Products */;
+					ProjectRef = B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B9D75E931CADB13100D7AEB3 /* pec-uno */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B97C514B1CB2D1BA00D18BBA /* PecUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PecUtils.framework;
+			remoteRef = B97C514A1CB2D1BA00D18BBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B9D75E921CADB13100D7AEB3 /* Resources */ = {
@@ -709,6 +765,7 @@
 			files = (
 				B9D75EA21CADB13100D7AEB3 /* LaunchScreen.storyboard in Resources */,
 				B9D75E9F1CADB13100D7AEB3 /* Assets.xcassets in Resources */,
+				B97C51591CB3013600D18BBA /* batman.png in Resources */,
 				B9D75E9D1CADB13100D7AEB3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,6 +779,7 @@
 			files = (
 				B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */,
 				B9D75EAA1CADB4C100D7AEB3 /* LoginViewController.swift in Sources */,
+				B97C514D1CB2F08600D18BBA /* ProfileViewController.swift in Sources */,
 				B9D75E981CADB13100D7AEB3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
