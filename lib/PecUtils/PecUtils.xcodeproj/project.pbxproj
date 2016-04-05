@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B947A1AC1CB4646F00FB93E4 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B947A1AB1CB4646F00FB93E4 /* ShareData.swift */; };
 		B9CAE7A11CB1248A00D215E6 /* PecUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B9CAE7A01CB1248A00D215E6 /* PecUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B9CAE7AF1CB1249F00D215E6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7AE1CB1249F00D215E6 /* Alert.swift */; };
 		B9CAE7B11CB1355200D215E6 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7B01CB1355200D215E6 /* Indicator.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B947A1AB1CB4646F00FB93E4 /* ShareData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		B9CAE79D1CB1248A00D215E6 /* PecUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PecUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9CAE7A01CB1248A00D215E6 /* PecUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PecUtils.h; sourceTree = "<group>"; };
 		B9CAE7A21CB1248A00D215E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +40,7 @@
 		B9CAE7931CB1248A00D215E6 = {
 			isa = PBXGroup;
 			children = (
+				B947A1AB1CB4646F00FB93E4 /* ShareData.swift */,
 				B9CAE7B41CB1ADE800D215E6 /* Regex.swift */,
 				B9CAE7B21CB1521000D215E6 /* Delay.swift */,
 				B9CAE7B01CB1355200D215E6 /* Indicator.swift */,
@@ -145,6 +148,7 @@
 				B9CAE7B31CB1521000D215E6 /* Delay.swift in Sources */,
 				B9CAE7B51CB1ADE800D215E6 /* Regex.swift in Sources */,
 				B9CAE7AF1CB1249F00D215E6 /* Alert.swift in Sources */,
+				B947A1AC1CB4646F00FB93E4 /* ShareData.swift in Sources */,
 				B9CAE7B11CB1355200D215E6 /* Indicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +299,7 @@
 				B9CAE7A71CB1248A00D215E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

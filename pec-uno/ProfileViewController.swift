@@ -14,27 +14,28 @@ import PecUtils
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var email: UILabel!
+    @IBOutlet weak var username: UILabel!
     
-    private var logged = false
+    var shareData = ShareData.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if (self.logged == true) {
+        if (self.isLoggedIn()) {
+            print("IsLogged!")
             self.loadData()
         }
     }
-    
-    
+
     override func viewDidAppear(animated: Bool) {
-        if (logged == true) {
-            super.viewDidAppear(animated)
-        } else {
-            self.performSegueWithIdentifier("ProfileLoginSegue", sender: self)
-        }
+//        if (self.isLoggedIn()) {
+//            print("IsLogged!")
+//            super.viewDidAppear(animated)
+//            self.loadData()
+//        } else {
+//            print("Isnt logged")
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,13 +43,25 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    private func goToLogin() {
+        let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController")
+        let navigationController = UINavigationController(rootViewController: profileViewController!)
+        self.presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
+    private func isLoggedIn() -> Bool {
+        return self.shareData.object != nil
+    }
+    
     private func loadData() {
-        let imageName = "batman.png"
-        let aux = UIImage(named: imageName)
-        image = UIImageView(image: aux!)
-        self.view.addSubview(image)
+        print("lal")
+        self.email.text = self.shareData.email
+//        self.fullName.text = String(self.shareData.object.fullname)
+        self.username.text = String(self.shareData.object.username)
     }
     
     @IBAction func logout(sender: AnyObject) {
+        self.shareData.object = nil
+        goToLogin()
     }
 }

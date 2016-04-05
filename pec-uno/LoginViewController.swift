@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     
     var backendless = Backendless.sharedInstance()
     var indicator = PecUtils.Indicator()
+    let shareData = PecUtils.ShareData.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,10 +40,16 @@ class LoginViewController: UIViewController {
         self.pwdTextField.text = nil;
     }
     
-     
+    private func goToProfile() {
+        let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController")
+        let navigationController = UINavigationController(rootViewController: profileViewController!)
+        self.presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
+    
     /*
-        Called when user clicks on submit
-        Does login API request and show alert on error
+    Called when user clicks on submit
+    Does login API request and show alert on error
     */
     @IBAction func loginAction(sender: AnyObject) {
         indicator.show(view)
@@ -50,17 +57,23 @@ class LoginViewController: UIViewController {
         backendless.userService.login(
             userNameTextField.text, password: pwdTextField.text,
             response: { (let registeredUser : BackendlessUser!) -> () in
-                print("User has been logged in (ASYNC): \(registeredUser)")
+//                print("User has been logged in (ASYNC): \(registeredUser)")
                 self.indicator.hide()
+                print("First")
+                print(registeredUser.email)
+                self.shareData.email = registeredUser.email
+                self.shareData.object = registeredUser
+                self.goToProfile()
             },
             error: { (let fault : Fault!) -> () in
-                print("Server reported an error: \(fault)")
+//                print("Server reported an error: \(fault)")
                 self.indicator.hide()
                 self.clearForm()
                 PecUtils.Alert(title: "Error", message: "Incorrect credentials")
                     .showSimple(self)
+                self.shareData.object = nil
             }
         )
     }
-
+    
 }
