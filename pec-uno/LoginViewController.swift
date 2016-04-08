@@ -19,7 +19,6 @@ class LoginViewController: UIViewController {
     
     var backendless = Backendless.sharedInstance()
     var indicator = PecUtils.Indicator()
-    let shareData = PecUtils.ShareData.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,21 +56,14 @@ class LoginViewController: UIViewController {
         backendless.userService.login(
             userNameTextField.text, password: pwdTextField.text,
             response: { (let registeredUser : BackendlessUser!) -> () in
-//                print("User has been logged in (ASYNC): \(registeredUser)")
                 self.indicator.hide()
-                print("First")
-                print(registeredUser.email)
-                self.shareData.email = registeredUser.email
-                self.shareData.object = registeredUser
                 self.goToProfile()
             },
             error: { (let fault : Fault!) -> () in
-//                print("Server reported an error: \(fault)")
                 self.indicator.hide()
                 self.clearForm()
                 PecUtils.Alert(title: "Error", message: "Incorrect credentials")
                     .showSimple(self)
-                self.shareData.object = nil
             }
         )
     }

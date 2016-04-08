@@ -18,24 +18,21 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var username: UILabel!
     
-    var shareData = ShareData.sharedInstance
+    private var currentUser: BackendlessUser?
+    private var backendless = Backendless.sharedInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadUser()
         if (self.isLoggedIn()) {
-            print("IsLogged!")
             self.loadData()
         }
     }
 
     override func viewDidAppear(animated: Bool) {
-//        if (self.isLoggedIn()) {
-//            print("IsLogged!")
-//            super.viewDidAppear(animated)
-//            self.loadData()
-//        } else {
-//            print("Isnt logged")
-//        }
+        super.viewDidAppear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,18 +47,24 @@ class ProfileViewController: UIViewController {
     }
     
     private func isLoggedIn() -> Bool {
-        return self.shareData.object != nil
+        return self.currentUser != nil
     }
     
     private func loadData() {
-        print("lal")
-        self.email.text = self.shareData.email
-//        self.fullName.text = String(self.shareData.object.fullname)
-        self.username.text = String(self.shareData.object.username)
+        print(currentUser);
+        username.text = currentUser!.name;
+        email.text = currentUser!.email;
+        let bla = currentUser!.getProperty("fullname") as! String;
+        print("fullname: \(bla)")
+        fullName.text = bla;
+    }
+    
+    private func loadUser() {
+        currentUser = backendless.userService.currentUser
     }
     
     @IBAction func logout(sender: AnyObject) {
-        self.shareData.object = nil
+        backendless.userService.logout()
         goToLogin()
     }
 }

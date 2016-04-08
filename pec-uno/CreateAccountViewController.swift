@@ -87,12 +87,12 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         
         switch textField {
             case username:
-                if (letterRange != nil || numberRange != nil){
+                if (letterRange != nil || numberRange != nil) {
                     return true
                 }
                 return false
             case fullName:
-                if (letterRange != nil || whitespaceRange != nil){
+                if (letterRange != nil || whitespaceRange != nil) {
                     return true
                 }
                 return false
@@ -142,7 +142,7 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
     /*
         Called on 'create account' click
         Does API register request with user data
-        Promps an error if needed
+        Prompts an error if needed
     */
     @IBAction func register(sender: AnyObject) {
         let errors = self.checkFormErrors()
@@ -154,19 +154,16 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         user.email = email.text
         user.name = username.text
         user.password = pwd.text
-        user.setProperty("fullName", object: fullName.text)
+        user.setProperty("fullname", object: fullName.text)
 
         backendless.userService.registering(user,
             response: { (registeredUser) -> Void in
                 let email = registeredUser.email
-                print("Usuario \(email) registrado correctamente")
                 PecUtils.Alert(title: "Success", message: "Welcome\n\(email)!")
                     .showSimple(self)
             },
             error: { (error) -> Void in
-                // Código en caso de error en el registro
                 let message = error.message
-                print("Error registrando al usuario: \(message)")
                 PecUtils.Alert(title: "API Error", message: message)
                     .showSimple(self)
             })
