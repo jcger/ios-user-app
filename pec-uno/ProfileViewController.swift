@@ -17,12 +17,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     private var currentUser: BackendlessUser?
     private var backendless = Backendless.sharedInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         loadUser()
         if (self.isLoggedIn()) {
@@ -33,6 +35,13 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        if revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            
+            revealViewController().rightViewRevealWidth = 150
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,9 +63,7 @@ class ProfileViewController: UIViewController {
         print(currentUser);
         username.text = currentUser!.name;
         email.text = currentUser!.email;
-        let bla = currentUser!.getProperty("fullname") as! String;
-        print("fullname: \(bla)")
-        fullName.text = bla;
+        fullName.text = currentUser!.getProperty("fullname") as? String;
     }
     
     private func loadUser() {

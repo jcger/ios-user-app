@@ -39,10 +39,16 @@ class LoginViewController: UIViewController {
         self.pwdTextField.text = nil;
     }
     
+    //sets the RevealViewController as the new rootViewController
     private func goToProfile() {
-        let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController")
-        let navigationController = UINavigationController(rootViewController: profileViewController!)
-        self.presentViewController(navigationController, animated: true, completion: nil)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        var nav = appDelegate.window?.rootViewController as? UINavigationController
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc  = storyboard.instantiateViewControllerWithIdentifier("RevealViewController")
+        nav = UINavigationController.init(rootViewController:vc )
+        nav!.navigationBarHidden = true
+        appDelegate.window?.rootViewController = nav
+        appDelegate.window?.makeKeyAndVisible()
     }
     
     
