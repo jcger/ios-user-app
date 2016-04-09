@@ -672,6 +672,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uoc.edu.pec-uno";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "./$(PROJECT_NAME)/Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -688,6 +689,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uoc.edu.pec-uno";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "./$(PROJECT_NAME)/Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
