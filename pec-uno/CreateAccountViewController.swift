@@ -16,6 +16,10 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pwd: UITextField!
     @IBOutlet weak var pwdRepeat: UITextField!
+    @IBOutlet weak var usernameErrorText: UILabel!
+    @IBOutlet weak var fullnameErrorText: UILabel!
+    @IBOutlet weak var emailErrorText: UILabel!
+    @IBOutlet weak var pwdErrorText: UILabel!
     
     private let MIN_LENGTH = 3
     private let MAX_LENGTH = 30
@@ -100,59 +104,55 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    private func highlightError(field: UITextField) {
-        let errorColor: UIColor = UIColor( red: 1.0, green: 0.0, blue:0.0, alpha: 1.0 )
-        field.layer.borderColor = errorColor.CGColor
-        field.layer.borderWidth = 1
-        field.layer.cornerRadius = 5.0
-    }
-    
     private func resetErrorHighlight() {
-        username.layer.borderWidth = 0
-        fullName.layer.borderWidth = 0
-        email.layer.borderWidth = 0
-        pwd.layer.borderWidth = 0
-        pwdRepeat.layer.borderWidth = 0
+        usernameErrorText.hidden = true
+        fullnameErrorText.hidden = true
+        emailErrorText.hidden = true
+        pwdErrorText.hidden = true
     }
     
     private func checkFormErrors() -> Bool {
-        var errorMsg: String = String()
+        var containsError: Bool = false
         self.resetErrorHighlight()
         
         if (username.text?.characters.count < MIN_LENGTH) {
-            self.highlightError(username)
-            errorMsg += " - Username too short.(Min: \(MIN_LENGTH))\n"
+            usernameErrorText.text = "Too short"
+            containsError = true
+            usernameErrorText.hidden = false
         }
         
         if (fullName.text?.characters.count < MIN_LENGTH) {
-            self.highlightError(fullName)
-            errorMsg += " - Full name too short.(Min: \(MIN_LENGTH))\n"
+            fullnameErrorText.text = "Too short"
+            containsError = true
+            fullnameErrorText.hidden = false
         }
         
         let regex = PecUtils.Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")
         if (!regex.match(email.text!)) {
-            self.highlightError(email)
-            errorMsg += " - Wrong email pattern.\n"
+            emailErrorText.text = "Wrong email pattern"
+            containsError = true
+            emailErrorText.hidden = false
         }
         
         if (pwd.text?.characters.count < MIN_LENGTH) {
-            self.highlightError(pwd)
-            errorMsg += " - Password too short. (Min: \(MIN_LENGTH))\n"
+            pwdErrorText.text = "Too short"
+            containsError = true
+            pwdErrorText.hidden = false
 
         } else if (pwd.text != pwdRepeat.text) {
-            errorMsg += " - Passwords aren't the same.\n"
+            pwdErrorText.text = "Passwords don't match"
+            containsError = true
+            pwdErrorText.hidden = false
         }
         
-        if errorMsg.isEmpty {
-            return false
-        } else {
+        if containsError == true {
             self.pwdRepeat.text = nil
             self.pwd.text = nil
-            PecUtils.Alert(title: "Error", message: errorMsg)
+            PecUtils.Alert(title: "Error", message: "There are errors on the form.\nPlease fix them before continuing.")
                 .showSimple(self)
-
-            return true
         }
+        
+        return containsError
     }
     
     /*
