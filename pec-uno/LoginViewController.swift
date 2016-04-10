@@ -9,7 +9,7 @@
 import UIKit
 import PecUtils
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     let APP_ID = "6C83ABA0-61D1-5E98-FFAC-358600659800"
     let SECRET_KEY = "A90E22B2-2EAF-ECB8-FFEF-0E6667AB8C00"
     let VERSION_NUM = "v1"
@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         backendless.initApp(APP_ID, secret:SECRET_KEY, version:VERSION_NUM)
+        initDelegates()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -39,6 +40,21 @@ class LoginViewController: UIViewController {
         self.pwdTextField.text = nil;
     }
     
+    func initDelegates() {
+        userNameTextField.delegate = self
+        pwdTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        switch textField {
+        case userNameTextField: pwdTextField.becomeFirstResponder()
+        default: textField.resignFirstResponder()
+        }
+        
+        return false
+    }
+
+    
     //sets the RevealViewController as the new rootViewController
     private func goToProfile() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -50,7 +66,6 @@ class LoginViewController: UIViewController {
         appDelegate.window?.rootViewController = nav
         appDelegate.window?.makeKeyAndVisible()
     }
-    
     
     /*
     Called when user clicks on submit
@@ -66,6 +81,7 @@ class LoginViewController: UIViewController {
                 self.goToProfile()
             },
             error: { (let fault : Fault!) -> () in
+                print(fault)
                 self.indicator.hide()
                 self.clearForm()
                 PecUtils.Alert(title: "Error", message: "Incorrect credentials")

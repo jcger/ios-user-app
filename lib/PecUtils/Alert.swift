@@ -15,10 +15,17 @@ public class Alert: UIAlertController  {
         self.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
     }
 
-    public func showSimple(viewController: UIViewController) {
+    public func showSimple(viewController: UIViewController, callback: (() -> Bool)?) {
         self.modalPresentationStyle = .Popover
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+        let OKAction = UIAlertAction(title: "OK", style: .Default) {
+            (action) -> Void in
+                callback?()
+        }
         self.addAction(OKAction)
         viewController.presentViewController(self, animated: true, completion: nil)
+    }
+    
+    public func showSimple(viewController: UIViewController) {
+        self.showSimple(viewController, callback: nil);
     }
 }

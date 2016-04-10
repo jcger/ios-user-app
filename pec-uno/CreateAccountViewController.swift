@@ -19,17 +19,10 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
     
     private let MIN_LENGTH = 3
     private let MAX_LENGTH = 30
-    
-    enum InputError: ErrorType {
-        case inputMissing
-        case pwdNotEqual
-    }
-    
+    private var indicator = PecUtils.Indicator()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //to avoid this view to overlap with the status bar
-        self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
         
         initDelegates()
     }
@@ -43,7 +36,7 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func initDelegates() {
+    private func initDelegates() {
         username.delegate = self
         fullName.delegate = self
         email.delegate = self
@@ -107,50 +100,59 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
+    private func highlightError(field: UITextField) {
+        let errorColor: UIColor = UIColor( red: 1.0, green: 0.0, blue:0.0, alpha: 1.0 )
+        field.layer.borderColor = errorColor.CGColor
+        field.layer.borderWidth = 1
+        field.layer.cornerRadius = 5.0
+    }
+    
+    private func resetErrorHighlight() {
+        username.layer.borderWidth = 0
+        fullName.layer.borderWidth = 0
+        email.layer.borderWidth = 0
+        pwd.layer.borderWidth = 0
+        pwdRepeat.layer.borderWidth = 0
+    }
+    
     private func checkFormErrors() -> Bool {
+        var errorMsg: String = String()
+        self.resetErrorHighlight()
+        
         if (username.text?.characters.count < MIN_LENGTH) {
-            PecUtils.Alert(title: "Error", message: "Username to short.").showSimple(self)
-            return true
+            self.highlightError(username)
+            errorMsg += " - Username too short.(Min: \(MIN_LENGTH))\n"
         }
         
         if (fullName.text?.characters.count < MIN_LENGTH) {
-            PecUtils.Alert(title: "Error", message: "Full username to short.").showSimple(self)
-            return true
+            self.highlightError(fullName)
+            errorMsg += " - Full name too short.(Min: \(MIN_LENGTH))\n"
         }
         
         let regex = PecUtils.Regex("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")
         if (!regex.match(email.text!)) {
-            PecUtils.Alert(title: "Error", message: "Wrong email pattern.").showSimple(self)
-            return true
+            self.highlightError(email)
+            errorMsg += " - Wrong email pattern.\n"
         }
         
         if (pwd.text?.characters.count < MIN_LENGTH) {
-            PecUtils.Alert(title: "Error", message: "Password to short.").showSimple(self)
-            return true
+            self.highlightError(pwd)
+            errorMsg += " - Password too short. (Min: \(MIN_LENGTH))\n"
+
+        } else if (pwd.text != pwdRepeat.text) {
+            errorMsg += " - Passwords aren't the same.\n"
         }
         
-        if (pwd.text != pwdRepeat.text) {
-            PecUtils.Alert(title: "Error", message: "Passwords aren't the same.").showSimple(self)
-            self.pwdRepeat.text = nil;
-            self.pwd.text = nil;
+        if errorMsg.isEmpty {
+            return false
+        } else {
+            self.pwdRepeat.text = nil
+            self.pwd.text = nil
+            PecUtils.Alert(title: "Error", message: errorMsg)
+                .showSimple(self)
+
             return true
         }
-
-        return false
-    }
-    
-    //TODO: Factorizar esto (también está en el login)
-    //TODO: Pasar algo a la otra view para ver que es usuario nuevo y darle la bienvenida desde
-    //la pantalla de profile
-    private func goToProfile() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        var nav = appDelegate.window?.rootViewController as? UINavigationController
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc  = storyboard.instantiateViewControllerWithIdentifier("RevealViewController")
-        nav = UINavigationController.init(rootViewController:vc )
-        nav!.navigationBarHidden = true
-        appDelegate.window?.rootViewController = nav
-        appDelegate.window?.makeKeyAndVisible()
     }
     
     /*
@@ -163,6 +165,8 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         if (errors) {
             return
         }
+        
+        self.indicator.show(view);
         let backendless = Backendless.sharedInstance()
         let user: BackendlessUser = BackendlessUser()
         user.email = email.text
@@ -172,22 +176,30 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
 
         backendless.userService.registering(user,
             response: { (registeredUser) -> Void in
-                let name = registeredUser.name
-                self.goToProfile();
-                PecUtils.Alert(title: "Success", message: "Welcome\n\(name)!")
-                    .showSimple(self)
+                self.indicator.hide()
+                PecUtils.Alert(title: "Success", message: "Account created successfully!")
+                    .showSimple(self, callback: self.back)
             },
             error: { (error) -> Void in
                 let message = error.message
+                self.indicator.hide()
                 PecUtils.Alert(title: "API Error", message: message)
                     .showSimple(self)
             })
 
     }
     
-    @IBAction func back(sender: AnyObject) {
+    private func back() -> Bool {
         if let navController = self.navigationController {
-            navController.popViewControllerAnimated(true)
+            dispatch_async(dispatch_get_main_queue()) {
+                navController.popViewControllerAnimated(true)
+                self.indicator.hide();
+            }
         }
+        return true;
+    }
+    
+    @IBAction func back(sender: AnyObject) {
+        self.back();
     }
 }

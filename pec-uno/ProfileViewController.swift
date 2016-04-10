@@ -24,15 +24,15 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         loadUser()
         if (self.isLoggedIn()) {
             self.loadData()
         }
-    }
-
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
         if revealViewController() != nil {
             menuButton.target = self.revealViewController()
@@ -59,10 +59,10 @@ class ProfileViewController: UIViewController {
     }
     
     private func loadData() {
-        print(currentUser);
-        username.text = currentUser!.name;
-        email.text = currentUser!.email;
-        fullName.text = currentUser!.getProperty("fullname") as? String;
+        let name = currentUser!.name
+        username.text = name
+        email.text = currentUser!.email
+        fullName.text = currentUser!.getProperty("fullname") as? String
     }
     
     private func loadUser() {
