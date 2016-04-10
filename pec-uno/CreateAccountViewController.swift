@@ -17,7 +17,7 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var pwd: UITextField!
     @IBOutlet weak var pwdRepeat: UITextField!
     
-    private let MIN_LENGTH = 6
+    private let MIN_LENGTH = 3
     private let MAX_LENGTH = 30
     
     enum InputError: ErrorType {
@@ -139,6 +139,20 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         return false
     }
     
+    //TODO: Factorizar esto (también está en el login)
+    //TODO: Pasar algo a la otra view para ver que es usuario nuevo y darle la bienvenida desde
+    //la pantalla de profile
+    private func goToProfile() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        var nav = appDelegate.window?.rootViewController as? UINavigationController
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc  = storyboard.instantiateViewControllerWithIdentifier("RevealViewController")
+        nav = UINavigationController.init(rootViewController:vc )
+        nav!.navigationBarHidden = true
+        appDelegate.window?.rootViewController = nav
+        appDelegate.window?.makeKeyAndVisible()
+    }
+    
     /*
         Called on 'create account' click
         Does API register request with user data
@@ -158,8 +172,9 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
 
         backendless.userService.registering(user,
             response: { (registeredUser) -> Void in
-                let email = registeredUser.email
-                PecUtils.Alert(title: "Success", message: "Welcome\n\(email)!")
+                let name = registeredUser.name
+                self.goToProfile();
+                PecUtils.Alert(title: "Success", message: "Welcome\n\(name)!")
                     .showSimple(self)
             },
             error: { (error) -> Void in
@@ -168,5 +183,11 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
                     .showSimple(self)
             })
 
+    }
+    
+    @IBAction func back(sender: AnyObject) {
+        if let navController = self.navigationController {
+            navController.popViewControllerAnimated(true)
+        }
     }
 }
