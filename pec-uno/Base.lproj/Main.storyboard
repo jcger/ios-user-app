@@ -805,10 +805,10 @@
             </objects>
             <point key="canvasLocation" x="1004" y="2175"/>
         </scene>
-        <!--View Controller-->
+        <!--Terms View Controller-->
         <scene sceneID="erI-pL-ACe">
             <objects>
-                <viewController id="Gvy-1a-3dw" sceneMemberID="viewController">
+                <viewController id="Gvy-1a-3dw" customClass="TermsViewController" customModule="pec_uno" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="45Z-l9-YIF"/>
                         <viewControllerLayoutGuide type="bottom" id="qRB-rl-MpU"/>
@@ -817,21 +817,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Best Terms and Conditions ever! " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbj-Kv-uTV">
-                                <rect key="frame" x="20" y="72" width="560" height="508"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbj-Kv-uTV">
+                                <rect key="frame" x="20" y="72" width="10" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10" id="3eo-Ns-4q4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqH-Fq-tBb">
+                                <rect key="frame" x="20" y="72" width="560" height="508"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Vbj-Kv-uTV" secondAttribute="bottom" constant="20" symbolic="YES" id="Kb7-Ui-X5S"/>
-                            <constraint firstItem="Vbj-Kv-uTV" firstAttribute="leading" secondItem="BO6-pw-mDV" secondAttribute="leadingMargin" id="dfh-ln-Hhn"/>
-                            <constraint firstItem="Vbj-Kv-uTV" firstAttribute="top" secondItem="45Z-l9-YIF" secondAttribute="bottom" constant="8" symbolic="YES" id="fXq-Y7-Tdx"/>
-                            <constraint firstItem="Vbj-Kv-uTV" firstAttribute="trailing" secondItem="BO6-pw-mDV" secondAttribute="trailingMargin" id="qaG-lr-aK5"/>
+                            <constraint firstItem="Vbj-Kv-uTV" firstAttribute="top" secondItem="45Z-l9-YIF" secondAttribute="bottom" constant="8" symbolic="YES" id="5dm-MZ-cBf"/>
+                            <constraint firstAttribute="bottom" secondItem="qqH-Fq-tBb" secondAttribute="bottom" constant="20" symbolic="YES" id="5im-L9-1gL"/>
+                            <constraint firstItem="qRB-rl-MpU" firstAttribute="top" secondItem="Vbj-Kv-uTV" secondAttribute="bottom" constant="495" id="7m6-9C-gk7"/>
+                            <constraint firstItem="qqH-Fq-tBb" firstAttribute="leading" secondItem="Vbj-Kv-uTV" secondAttribute="leading" id="CAY-hj-358"/>
+                            <constraint firstItem="qqH-Fq-tBb" firstAttribute="trailing" secondItem="BO6-pw-mDV" secondAttribute="trailingMargin" id="Fee-ty-P3q"/>
+                            <constraint firstItem="qqH-Fq-tBb" firstAttribute="leading" secondItem="BO6-pw-mDV" secondAttribute="leadingMargin" id="WPk-3G-ydT"/>
+                            <constraint firstItem="qqH-Fq-tBb" firstAttribute="top" secondItem="Vbj-Kv-uTV" secondAttribute="top" id="nYV-8y-tm6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="termsWebView" destination="qqH-Fq-tBb" id="N87-jQ-ELV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JxZ-8Q-Gzj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
