@@ -10,7 +10,6 @@
 		B9CAE7A11CB1248A00D215E6 /* PecUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B9CAE7A01CB1248A00D215E6 /* PecUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B9CAE7AF1CB1249F00D215E6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7AE1CB1249F00D215E6 /* Alert.swift */; };
 		B9CAE7B11CB1355200D215E6 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7B01CB1355200D215E6 /* Indicator.swift */; };
-		B9CAE7B31CB1521000D215E6 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7B21CB1521000D215E6 /* Delay.swift */; };
 		B9CAE7B51CB1ADE800D215E6 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7B41CB1ADE800D215E6 /* Regex.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,7 +19,6 @@
 		B9CAE7A21CB1248A00D215E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9CAE7AE1CB1249F00D215E6 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B9CAE7B01CB1355200D215E6 /* Indicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
-		B9CAE7B21CB1521000D215E6 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		B9CAE7B41CB1ADE800D215E6 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,7 +37,6 @@
 			isa = PBXGroup;
 			children = (
 				B9CAE7B41CB1ADE800D215E6 /* Regex.swift */,
-				B9CAE7B21CB1521000D215E6 /* Delay.swift */,
 				B9CAE7B01CB1355200D215E6 /* Indicator.swift */,
 				B9CAE7AE1CB1249F00D215E6 /* Alert.swift */,
 				B9CAE79F1CB1248A00D215E6 /* PecUtils */,
@@ -142,7 +139,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9CAE7B31CB1521000D215E6 /* Delay.swift in Sources */,
 				B9CAE7B51CB1ADE800D215E6 /* Regex.swift in Sources */,
 				B9CAE7AF1CB1249F00D215E6 /* Alert.swift in Sources */,
 				B9CAE7B11CB1355200D215E6 /* Indicator.swift in Sources */,

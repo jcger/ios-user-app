@@ -246,19 +246,19 @@
 			children = (
 				B9124C001CBC484800647B56 /* Resources */,
 				B9603AE11CB834F00060CEB9 /* SWRevealViewController */,
-				B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */,
 				B9D75EA91CADB4C100D7AEB3 /* LoginViewController.swift */,
+				B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */,
 				B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */,
-				B9078A1C1CB8753500537E1D /* InformationViewController.swift */,
-				B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */,
+				B9124C031CBC48A500647B56 /* TermsViewController.swift */,
 				B9695D611CB8708800C8DCB4 /* MyPlacesViewController.swift */,
 				B9078A191CB8731700537E1D /* MapViewController.swift */,
+				B9078A1C1CB8753500537E1D /* InformationViewController.swift */,
 				B9695D601CB83C7800C8DCB4 /* Bridging-Header.h */,
 				B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */,
+				B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */,
 				B9D75E9E1CADB13100D7AEB3 /* Assets.xcassets */,
 				B9D75EA01CADB13100D7AEB3 /* LaunchScreen.storyboard */,
 				B9D75EA31CADB13100D7AEB3 /* Info.plist */,
-				B9124C031CBC48A500647B56 /* TermsViewController.swift */,
 			);
 			path = "pec-uno";
 			sourceTree = "<group>";

@@ -36,7 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    private func clearForm() {
+    func clearForm() {
         self.pwdTextField.text = nil;
     }
     

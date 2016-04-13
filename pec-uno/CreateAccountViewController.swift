@@ -104,6 +104,7 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
+    /* hides all the error labels */
     private func resetErrorHighlight() {
         usernameErrorText.hidden = true
         fullnameErrorText.hidden = true
@@ -193,7 +194,6 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
         if let navController = self.navigationController {
             dispatch_async(dispatch_get_main_queue()) {
                 navController.popViewControllerAnimated(true)
-                self.indicator.hide();
             }
         }
         return true;
