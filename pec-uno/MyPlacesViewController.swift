@@ -19,11 +19,9 @@ class MyPlacesViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if revealViewController() != nil {
-            menuButton.target = self.revealViewController()
+            menuButton.target = revealViewController()
             menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            
-            revealViewController().rightViewRevealWidth = 150
+            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
 }

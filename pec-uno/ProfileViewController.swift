@@ -31,15 +31,13 @@ class ProfileViewController: UIViewController {
         
         loadUser()
         if (self.isLoggedIn()) {
-            self.loadData()
+            self.loadUserData()
         }
         
         if revealViewController() != nil {
-            menuButton.target = self.revealViewController()
+            menuButton.target = revealViewController()
             menuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            
-            revealViewController().rightViewRevealWidth = 150
+            self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
     }
     
@@ -58,7 +56,7 @@ class ProfileViewController: UIViewController {
         return self.currentUser != nil
     }
     
-    private func loadData() {
+    private func loadUserData() {
         let name = currentUser!.name
         username.text = name
         email.text = currentUser!.email

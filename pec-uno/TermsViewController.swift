@@ -20,12 +20,10 @@ class TermsViewController: UIViewController {
     func loadTermsHTML() {
         
         //Load the HTML file from resources
-        guard let path = NSBundle.mainBundle()
-            .pathForResource("terms", ofType: "html") else {
-                return
-        }
+        let path = NSBundle.mainBundle()
+            .pathForResource("terms", ofType: "html")
         
-        let url = NSURL(fileURLWithPath: path)
+        let url = NSURL(fileURLWithPath: path!)
         
         if let data = NSData(contentsOfURL: url) {
             

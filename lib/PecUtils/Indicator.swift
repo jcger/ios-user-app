@@ -14,15 +14,6 @@ public class Indicator : UIActivityIndicatorView  {
     public convenience init() {
         self.init(frame: CGRectMake(0, 0, 50, 50))
         
-        self.autoresizingMask = [
-            .FlexibleBottomMargin,
-            .FlexibleLeftMargin,
-            .FlexibleWidth,
-            .FlexibleRightMargin,
-            .FlexibleTopMargin,
-            .FlexibleHeight,
-            .FlexibleBottomMargin
-        ]
         self.hidesWhenStopped = true
         self.activityIndicatorViewStyle = .WhiteLarge
         self.color = UIColor.blackColor()
