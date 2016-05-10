@@ -12,6 +12,7 @@
 		B9CAE7AF1CB1249F00D215E6 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7AE1CB1249F00D215E6 /* Alert.swift */; };
 		B9CAE7B11CB1355200D215E6 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7B01CB1355200D215E6 /* Indicator.swift */; };
 		B9CAE7B51CB1ADE800D215E6 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CAE7B41CB1ADE800D215E6 /* Regex.swift */; };
+		B9DBCFFF1CE10F5C0052C8B5 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DBCFFE1CE10F5C0052C8B5 /* Entities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		B9CAE7AE1CB1249F00D215E6 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		B9CAE7B01CB1355200D215E6 /* Indicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
 		B9CAE7B41CB1ADE800D215E6 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		B9DBCFFE1CE10F5C0052C8B5 /* Entities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 		B9CAE7931CB1248A00D215E6 = {
 			isa = PBXGroup;
 			children = (
+				B9DBCFFE1CE10F5C0052C8B5 /* Entities.swift */,
 				B90DE2191CDF7D3100DD35D7 /* Delay.swift */,
 				B9CAE7B41CB1ADE800D215E6 /* Regex.swift */,
 				B9CAE7B01CB1355200D215E6 /* Indicator.swift */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9DBCFFF1CE10F5C0052C8B5 /* Entities.swift in Sources */,
 				B9CAE7B51CB1ADE800D215E6 /* Regex.swift in Sources */,
 				B90DE21A1CDF7D3100DD35D7 /* Delay.swift in Sources */,
 				B9CAE7AF1CB1249F00D215E6 /* Alert.swift in Sources */,

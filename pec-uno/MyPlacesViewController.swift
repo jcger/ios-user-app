@@ -79,6 +79,8 @@ class MyPlacesViewController: UIViewController, UIScrollViewDelegate, UITableVie
                 mapView.removeAnnotation(currentAnnotation)
             }
             currentAnnotation = annotation
+            PecUtils.Places.sharedInstance.latitude = currentLocation!.coordinate.latitude
+            PecUtils.Places.sharedInstance.longitude = currentLocation!.coordinate.longitude
             self.stopRequestingLocation()
         }
     }
