@@ -15,12 +15,14 @@ class MyPlacesViewController: UIViewController, UIScrollViewDelegate, UITableVie
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: MyPlacesTableViewController!
+    private var currentUser: BackendlessUser?
+    private var backendless = Backendless.sharedInstance()
     var locationManager : CLLocationManager!
     var currentAnnotation: MKPointAnnotation!
     var currentLocation: CLLocation!
     var pinImageName = "pin"
+    var items: [String] = []
     
-    var items: [String] = ["1","2","4","5","6"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -29,7 +31,9 @@ class MyPlacesViewController: UIViewController, UIScrollViewDelegate, UITableVie
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         
+        self.loadUser()
         self.startRequestingLocation()
+        self.fetchingPlaces()
         
         mapView.delegate = self
         //mapView.showsUserLocation = true
@@ -44,7 +48,7 @@ class MyPlacesViewController: UIViewController, UIScrollViewDelegate, UITableVie
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height - 40, 0, 0, 0);
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -54,7 +58,7 @@ class MyPlacesViewController: UIViewController, UIScrollViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return items.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -147,6 +151,18 @@ class MyPlacesViewController: UIViewController, UIScrollViewDelegate, UITableVie
         }
         
         return annotationView
+    }
+    
+    private func initCells() {
+
+    }
+    
+    func fetchingPlaces() {
+        print(currentUser)
+    }
+    
+    private func loadUser() {
+        currentUser = backendless.userService.currentUser
     }
     
 }

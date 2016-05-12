@@ -158,23 +158,30 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
         
         let backendless = Backendless.sharedInstance()
-        currentUser = backendless.userService.currentUser
-
-        let place = GeoPoint.geoPoint(
+        let currentUser = backendless.userService.currentUser
+        var geopoints: Array<GeoPoint> = []
+        let geopoint = GeoPoint.geoPoint(
             GEO_POINT(latitude: PecUtils.Places.sharedInstance.latitude, longitude: PecUtils.Places.sharedInstance.longitude),
             categories: [],
-            metadata: ["name": nameTextField.text!, "detail": textView.text, "Users":currentUser!]
+            metadata: ["name": nameTextField.text!, "detail": textView.text]
             ) as! GeoPoint
 
+        geopoints.append(geopoint)
         self.indicator.show(view);
-        backendless.geoService.savePoint(
-            place,
-            response: { (let point : GeoPoint!) -> () in
+        let places = currentUser.getProperty("places") as? Array<GeoPoint>
+        for place in places! {
+            geopoints.append(place)
+        }
+        currentUser.setProperty("places", object: geopoints)
+        
+        backendless.persistenceService.of(currentUser.ofClass()).save(
+            currentUser,
+            response: { ( data : AnyObject!) -> () in
                 self.indicator.hide();
                 PecUtils.Alert(title: "Success", message: "Place saved successfully!")
                     .showSimple(self, callback: self.back)
             },
-            error: { (let fault : Fault!) -> () in
+            error: { ( fault : Fault!) -> () in
                 self.indicator.hide();
                 PecUtils.Alert(title: "Error", message: "\(fault)")
                     .showSimple(self, callback: self.back)
@@ -190,5 +197,6 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
         return true;
     }
+    
 }
 

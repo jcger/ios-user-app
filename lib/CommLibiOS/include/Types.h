@@ -48,6 +48,8 @@
 +(NSArray *)propertyAttributes:(id)obj;
 +(NSDictionary *)propertyKeysWithAttributes:(id)obj;
 +(NSDictionary *)propertyDictionary:(id)obj;
+// item = [NSThread callStackSymbols][1];
+-(void)makeSwiftClassPrefix:(NSString *)item;
 // target/plist options
 +(NSString *)targetName;
 +(NSDictionary *)getInfoPlist;
