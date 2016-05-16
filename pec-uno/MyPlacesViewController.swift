@@ -13,6 +13,7 @@ import PecUtils
 public class Image: NSObject {
     public var image: String?
     public var place: String?
+    public var objectId: String?
 }
 
 public class Place: NSObject {
@@ -48,6 +49,7 @@ class MyPlacesViewController: UITableViewController {
     private var currentUser: BackendlessUser?
     private var backendless = Backendless.sharedInstance()
     private var places = []
+    private var indicator = PecUtils.Indicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +74,7 @@ class MyPlacesViewController: UITableViewController {
     
     private func loadUserPlaces() {
         if (StaticPlaces.sharedInstance.places == nil) {
+            self.indicator.show(view);
             currentUser = backendless.userService.currentUser
             let dataQuery = BackendlessDataQuery()
             let  queryOptions = QueryOptions()
@@ -83,7 +86,9 @@ class MyPlacesViewController: UITableViewController {
             let bc = backendless.data.of(Place.ofClass()).find(dataQuery, fault: &error)
             if error == nil {
                 StaticPlaces.sharedInstance.places = bc.data as? [Place]
+                self.indicator.hide();
             } else {
+                self.indicator.hide();
                 PecUtils.Alert(title: "Error", message: "Error loading places.\n\(error?.description)")
                     .showSimple(self)
             }
@@ -91,6 +96,9 @@ class MyPlacesViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (StaticPlaces.sharedInstance.places == nil) {
+            return 0
+        }
         return StaticPlaces.sharedInstance.places!.count
     }
     
