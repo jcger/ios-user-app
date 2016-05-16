@@ -23,6 +23,7 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
     private var currentUser: BackendlessUser?
     private var currentLocation: CLLocation!
     private let pinImageName = "pin"
+    private let backendless = Backendless.sharedInstance()
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -157,33 +158,26 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
             return
         }
         
-        let backendless = Backendless.sharedInstance()
-        let currentUser = backendless.userService.currentUser
-        var geopoints: Array<GeoPoint> = []
-        let geopoint = GeoPoint.geoPoint(
-            GEO_POINT(latitude: PecUtils.Places.sharedInstance.latitude, longitude: PecUtils.Places.sharedInstance.longitude),
-            categories: [],
-            metadata: ["name": nameTextField.text!, "detail": textView.text]
-            ) as! GeoPoint
-
-        geopoints.append(geopoint)
-        self.indicator.show(view);
-        let places = currentUser.getProperty("places") as? Array<GeoPoint>
-        for place in places! {
-            geopoints.append(place)
-        }
-        currentUser.setProperty("places", object: geopoints)
+        let place = Place()
+        place.name = self.nameTextField.text!
+        place.detail = self.textView.text!
         
-        backendless.persistenceService.of(currentUser.ofClass()).save(
-            currentUser,
-            response: { ( data : AnyObject!) -> () in
+        place.location = GeoPoint.geoPoint(
+            GEO_POINT(latitude: currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude),
+            categories: ["location"],
+            metadata: ["location": place]
+            ) as? GeoPoint
+            
+        backendless.geoService.savePoint(
+            place.location,
+            response: { (let point : GeoPoint!) -> () in
                 self.indicator.hide();
                 PecUtils.Alert(title: "Success", message: "Place saved successfully!")
                     .showSimple(self, callback: self.back)
             },
-            error: { ( fault : Fault!) -> () in
+            error: { (let fault : Fault!) -> () in
                 self.indicator.hide();
-                PecUtils.Alert(title: "Error", message: "\(fault)")
+                PecUtils.Alert(title: "Error", message: "Error saving the place.\n\(fault)")
                     .showSimple(self, callback: self.back)
             }
         )
@@ -197,6 +191,5 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
         return true;
     }
-    
 }
 

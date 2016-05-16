@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		B9078A1A1CB8731700537E1D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9078A191CB8731700537E1D /* MapViewController.swift */; };
 		B9078A1D1CB8753500537E1D /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9078A1C1CB8753500537E1D /* InformationViewController.swift */; };
-		B90DE2171CDF409600DD35D7 /* MyPlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90DE2161CDF409600DD35D7 /* MyPlacesTableViewController.swift */; };
 		B90DE22C1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */; };
 		B9124BFE1CBC484300647B56 /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = B9124BFD1CBC484300647B56 /* terms.html */; };
 		B9124C041CBC48A500647B56 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9124C031CBC48A500647B56 /* TermsViewController.swift */; };
 		B9603AE41CB835240060CEB9 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9603AE31CB835240060CEB9 /* SWRevealViewController.m */; };
 		B9695D621CB8708800C8DCB4 /* MyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9695D611CB8708800C8DCB4 /* MyPlacesViewController.swift */; };
+		B9793B671CE8F60600207D05 /* MyPlacesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9793B661CE8F60600207D05 /* MyPlacesDetailViewController.swift */; };
 		B97C514D1CB2F08600D18BBA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */; };
 		B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */; };
 		B9D75E981CADB13100D7AEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */; };
@@ -45,7 +45,6 @@
 /* Begin PBXFileReference section */
 		B9078A191CB8731700537E1D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B9078A1C1CB8753500537E1D /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
-		B90DE2161CDF409600DD35D7 /* MyPlacesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesTableViewController.swift; sourceTree = "<group>"; };
 		B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesNewViewController.swift; sourceTree = "<group>"; };
 		B9124BFD1CBC484300647B56 /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
 		B9124C031CBC48A500647B56 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +52,7 @@
 		B9603AE31CB835240060CEB9 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		B9695D601CB83C7800C8DCB4 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		B9695D611CB8708800C8DCB4 /* MyPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesViewController.swift; sourceTree = "<group>"; };
+		B9793B661CE8F60600207D05 /* MyPlacesDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesDetailViewController.swift; sourceTree = "<group>"; };
 		B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PecUtils.xcodeproj; path = lib/PecUtils/PecUtils.xcodeproj; sourceTree = "<group>"; };
 		B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -254,8 +254,8 @@
 				B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */,
 				B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */,
 				B9124C031CBC48A500647B56 /* TermsViewController.swift */,
+				B9793B661CE8F60600207D05 /* MyPlacesDetailViewController.swift */,
 				B9695D611CB8708800C8DCB4 /* MyPlacesViewController.swift */,
-				B90DE2161CDF409600DD35D7 /* MyPlacesTableViewController.swift */,
 				B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */,
 				B9078A191CB8731700537E1D /* MapViewController.swift */,
 				B9078A1C1CB8753500537E1D /* InformationViewController.swift */,
@@ -567,12 +567,12 @@
 				B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */,
 				B9D75EAA1CADB4C100D7AEB3 /* LoginViewController.swift in Sources */,
 				B9695D621CB8708800C8DCB4 /* MyPlacesViewController.swift in Sources */,
-				B90DE2171CDF409600DD35D7 /* MyPlacesTableViewController.swift in Sources */,
 				B9603AE41CB835240060CEB9 /* SWRevealViewController.m in Sources */,
 				B9124C041CBC48A500647B56 /* TermsViewController.swift in Sources */,
 				B90DE22C1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift in Sources */,
 				B97C514D1CB2F08600D18BBA /* ProfileViewController.swift in Sources */,
 				B9D75E981CADB13100D7AEB3 /* AppDelegate.swift in Sources */,
+				B9793B671CE8F60600207D05 /* MyPlacesDetailViewController.swift in Sources */,
 				B9078A1A1CB8731700537E1D /* MapViewController.swift in Sources */,
 				B9078A1D1CB8753500537E1D /* InformationViewController.swift in Sources */,
 			);
