@@ -13,6 +13,7 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionViewCell!
+    @IBOutlet weak var imageView: UIImageView!
     
     
     private let backendless = Backendless.sharedInstance()
@@ -21,6 +22,7 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
     private var indicator = PecUtils.Indicator()
     private var currentUser: BackendlessUser?
     private var images: Array<Image>?
+    let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -74,7 +76,7 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
         let timestamp = Int(ceil(NSDate().timeIntervalSince1970 * 1000))
         self.indicator.show(view);
         backendless.fileService.upload(
-            "\(chosenPlace!.objectId!)\(timestamp).jpg",
+            "\(chosenPlace!.objectId!)\(timestamp).png",
             content: newImageData,
             overwrite:true,
             response: { ( uploadedFile : BackendlessFile!) -> () in
@@ -100,17 +102,15 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
         let bc = backendless.data.of(Image.ofClass()).find(dataQuery, fault: &error)
         if error == nil {
             images = (bc.data as? [Image])!
-            loadImages()
+            if (images!.count > 0) {
+                downloadImage(images![0].image!)
+            }
             self.indicator.hide();
         } else {
             self.indicator.hide();
             PecUtils.Alert(title: "Error", message: "Error loading places.\n\(error?.description)")
                 .showSimple(self)
         }
-    }
-    
-    private func loadImages() {
-        
     }
 
     private func uploadRelation(file: BackendlessFile!) {
@@ -137,5 +137,36 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
     @IBAction func upload(sender: AnyObject) {
         self.openGallery()
     }
+    
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
+    
+    func downloadImage(fileUrl: String) {
+        self.indicator.show(view);
+        let imgURL: NSURL = NSURL(string: fileUrl)!
+        let request: NSURLRequest = NSURLRequest(URL: imgURL)
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request){
+            (data, response, error) -> Void in
+            
+            if (error == nil && data != nil) {
+                func display_image() {
+                    self.imageView.image = UIImage(data: data!)
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), display_image)
+            }
+
+            self.indicator.hide();
+        }
+        
+        task.resume()
+
+    }
+
 }
 
