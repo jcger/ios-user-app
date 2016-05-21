@@ -12,7 +12,6 @@
 		B90DE22C1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */; };
 		B9124BFE1CBC484300647B56 /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = B9124BFD1CBC484300647B56 /* terms.html */; };
 		B9124C041CBC48A500647B56 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9124C031CBC48A500647B56 /* TermsViewController.swift */; };
-		B94313DF1CEA4E9D00CAC086 /* ViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94313DE1CEA4E9D00CAC086 /* ViewCell.swift */; };
 		B9603AE41CB835240060CEB9 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9603AE31CB835240060CEB9 /* SWRevealViewController.m */; };
 		B9695D621CB8708800C8DCB4 /* MyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9695D611CB8708800C8DCB4 /* MyPlacesViewController.swift */; };
 		B9793B671CE8F60600207D05 /* MyPlacesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9793B661CE8F60600207D05 /* MyPlacesDetailViewController.swift */; };
@@ -50,7 +49,6 @@
 		B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesNewViewController.swift; sourceTree = "<group>"; };
 		B9124BFD1CBC484300647B56 /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
 		B9124C031CBC48A500647B56 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
-		B94313DE1CEA4E9D00CAC086 /* ViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCell.swift; sourceTree = "<group>"; };
 		B9603AE21CB835240060CEB9 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		B9603AE31CB835240060CEB9 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		B9695D601CB83C7800C8DCB4 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 				B9D75E9E1CADB13100D7AEB3 /* Assets.xcassets */,
 				B9D75EA01CADB13100D7AEB3 /* LaunchScreen.storyboard */,
 				B9D75EA31CADB13100D7AEB3 /* Info.plist */,
-				B94313DE1CEA4E9D00CAC086 /* ViewCell.swift */,
 			);
 			path = "pec-uno";
 			sourceTree = "<group>";
@@ -571,7 +568,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */,
-				B94313DF1CEA4E9D00CAC086 /* ViewCell.swift in Sources */,
 				B9D75EAA1CADB4C100D7AEB3 /* LoginViewController.swift in Sources */,
 				B9695D621CB8708800C8DCB4 /* MyPlacesViewController.swift in Sources */,
 				B9D2B0631CEA085400B336F6 /* MyPlacesPhotosViewController.swift in Sources */,

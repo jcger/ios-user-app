@@ -12,9 +12,7 @@ import PecUtils
 class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionViewCell!
     @IBOutlet weak var imageView: UIImageView!
-    
     
     private let backendless = Backendless.sharedInstance()
     private var newImageData: NSData?
@@ -22,7 +20,8 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
     private var indicator = PecUtils.Indicator()
     private var currentUser: BackendlessUser?
     private var images: Array<Image>?
-    let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
+    private var currentImage: Int?
+    private var noImage: Bool?
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -37,6 +36,7 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
         chosenPlace = StaticPlaces.sharedInstance.places![StaticPlaces.sharedInstance.selected]
         nameLabel.text = chosenPlace!.name
         
+        currentImage = 0
         fetchImages()
 
     }
@@ -90,22 +90,24 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
     }
     
     private func fetchImages() {
-        self.indicator.show(view);
         currentUser = backendless.userService.currentUser
         let dataQuery = BackendlessDataQuery()
         let  queryOptions = QueryOptions()
         queryOptions.relationsDepth = 1
         dataQuery.whereClause = "ownerId = '\(currentUser!.objectId)' and place = '\(chosenPlace!.objectId!)'"
         dataQuery.queryOptions = queryOptions
-        
         var error: Fault?
         let bc = backendless.data.of(Image.ofClass()).find(dataQuery, fault: &error)
         if error == nil {
             images = (bc.data as? [Image])!
             if (images!.count > 0) {
-                downloadImage(images![0].image!)
+                noImage = false
+                downloadImage(images![currentImage!].image!)
+            } else {
+                noImage = true
+                imageView.image = UIImage(named: "no_image")
+                self.indicator.hide();
             }
-            self.indicator.hide();
         } else {
             self.indicator.hide();
             PecUtils.Alert(title: "Error", message: "Error loading places.\n\(error?.description)")
@@ -124,6 +126,8 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
             imageRelation,
             response: { (result: AnyObject!) -> Void in
                 self.indicator.hide();
+                self.images?.append(imageRelation)
+                self.fetchImages()
                 PecUtils.Alert(title: "Success!", message: "Your image has been uploaded successfully!")
                     .showSimple(self)
             },
@@ -145,6 +149,7 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func downloadImage(fileUrl: String) {
+        let this = self
         self.indicator.show(view);
         let imgURL: NSURL = NSURL(string: fileUrl)!
         let request: NSURLRequest = NSURLRequest(URL: imgURL)
@@ -156,17 +161,66 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
             if (error == nil && data != nil) {
                 func display_image() {
                     self.imageView.image = UIImage(data: data!)
+                    self.indicator.hide()
                 }
-                
                 dispatch_async(dispatch_get_main_queue(), display_image)
             }
-
-            self.indicator.hide();
         }
-        
         task.resume()
 
     }
+    
+    func remove(newPosition: Int) {
 
+        let dataStore = backendless.data.of(Image.ofClass())
+        
+        let image = images![self.currentImage!];
+        
+        dataStore.save(
+            image,
+            response: { (result: AnyObject!) -> Void in
+                let savedImage = result as! Image
+                
+                // now delete the saved object
+                dataStore.remove(
+                    savedImage,
+                    response: { (result: AnyObject!) -> Void in
+                        self.images!.removeAtIndex(self.currentImage!)
+                        self.currentImage = newPosition
+                        self.fetchImages()
+                    },
+                    error: { (fault: Fault!) -> Void in
+                        print("Server reported an error (2): \(fault)")
+                })
+                
+            },
+            error: { (fault: Fault!) -> Void in
+                print("Server reported an error (1): \(fault)")
+        })
+    }
+    
+    @IBAction func onDelete(sender: AnyObject) {
+        let count = images!.count
+        if (count > 0) {
+            var newPosition = currentImage!
+            if (self.currentImage == count - 1) {
+                newPosition--
+            }
+            self.remove(newPosition)
+        }
+    }
+
+    @IBAction func previous(sender: AnyObject) {
+        if (currentImage! > 0) {
+            currentImage!--
+            downloadImage(images![currentImage!].image!)
+        }
+    }
+    @IBAction func next(sender: AnyObject) {
+        if (currentImage! + 1 < images!.count) {
+            currentImage!++
+            downloadImage(images![currentImage!].image!)
+        }
+    }
 }
 
