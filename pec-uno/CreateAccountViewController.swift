@@ -200,6 +200,7 @@ class CreateAccountViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func back(sender: AnyObject) {
-        self.back();
+        self.back()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

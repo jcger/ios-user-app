@@ -1,26 +1,28 @@
 //
-//  MyPlacesNew.swift
+//  MyPlacesEditViewController.swift
 //  pec-uno
 //
-//  Created by Julian Gernun on 8/5/16.
+//  Created by Julian Gernun on 22/5/16.
 //  Copyright © 2016 uoc. All rights reserved.
 //
 
+import Foundation
 import PecUtils
 
-class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MyPlacesEditViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nameError: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var mapView: MKMapView!
-    
+
     private var currentAnnotation: MKPointAnnotation!
     private var locationManager : CLLocationManager!
     private let MIN_LENGTH = 3
     private var indicator = PecUtils.Indicator()
     private var currentUser: BackendlessUser?
-    private var currentLocation: CLLocation!
+    private var currentLocation: GeoPoint!
+    private var chosenPlace: Place?
     private let backendless = Backendless.sharedInstance()
     
     override func viewDidAppear(animated: Bool) {
@@ -32,7 +34,39 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         mapView.delegate = self
         mapView.mapType = MKMapType.Standard
-        self.startRequestingLocation()
+
+        self.loadData()
+        self.initMap()
+    }
+    
+    private func centerMapOnLocation(location: CLLocationCoordinate2D) {
+        let regionRadius: CLLocationDistance = 1000
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location,
+            regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    private func initMap() {
+        let latitude = CLLocationDegrees((chosenPlace?.location?.latitude)!)
+        let longitude = CLLocationDegrees((chosenPlace?.location?.longitude)!)
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        // Drop a pin
+        let dropPin = MKPointAnnotation()
+        dropPin.coordinate = location
+        dropPin.title = chosenPlace?.name
+        mapView.addAnnotation(dropPin)
+        centerMapOnLocation(location)
+    }
+    
+    private func loadData() {
+        if (StaticPlaces.sharedInstance.selected == -1) {
+            self.back()
+            return
+        }
+        chosenPlace = StaticPlaces.sharedInstance.places![StaticPlaces.sharedInstance.selected]
+        nameTextField.text = chosenPlace!.name
+        textView.text = chosenPlace!.detail
+        currentLocation = chosenPlace!.location
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -42,31 +76,13 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if (!locations.isEmpty && abs(locations.last!.timestamp.timeIntervalSinceNow) < 5) {
-            currentLocation = locations.last
-            
-            let center = CLLocationCoordinate2D(latitude: currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude)
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            
-            self.mapView.setRegion(region, animated: true)
-            let annotation = self.createAnnotation(currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude, locationName: "Position")
-            mapView.addAnnotation(annotation)
-            if (currentAnnotation !== nil) {
-                mapView.removeAnnotation(currentAnnotation)
-            }
-            currentAnnotation = annotation
-            self.stopRequestingLocation()
-        }
-    }
-    
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         let latitude = view.annotation?.coordinate.latitude
         let longitude = view.annotation?.coordinate.longitude
         
-        self.currentLocation = CLLocation(latitude: latitude!, longitude: longitude!)
+        currentLocation = GeoPoint(point: GEO_POINT(latitude: latitude!, longitude: longitude!))
     }
-
+    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKPointAnnotation {
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myPin")
@@ -81,39 +97,9 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
         return nil
     }
     
-    private func startRequestingLocation() {
-        if (self.locationManager == nil) {
-            self.locationManager = CLLocationManager()
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            self.locationManager.requestWhenInUseAuthorization()
-        }
-        
-        self.locationManager.startUpdatingLocation()
-    }
-    
-    private func stopRequestingLocation() {
-        self.locationManager.stopUpdatingLocation()
-    }
-    
-    //Return CLLocation Coordinate
-    private func getLocationObject(latitude:Double, longitude:Double) -> CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(
-            latitude: latitude,
-            longitude: longitude
-        )
-    }
-    
-    private func createAnnotation(latitude:Double, longitude:Double, locationName:String) -> MKPointAnnotation {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = self.getLocationObject(latitude, longitude: longitude)
-        annotation.title = locationName
-        return annotation
-    }
-    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if (text == "\n") {
-        textView.resignFirstResponder()
+            textView.resignFirstResponder()
             return false
         }
         return true
@@ -136,38 +122,64 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
         return containsError
     }
     
-    @IBAction func uploadPlace(sender: AnyObject) {
+    func update() {
         let errors = self.checkFormErrors()
         if (errors) {
             return
         }
         
+        self.indicator.show(view)
+        
+        let dataStore = Backendless.sharedInstance().data.of(Place.ofClass())
+        
         let place = Place()
+        place.ownerId = chosenPlace!.ownerId
+        place.objectId = chosenPlace!.objectId
         place.name = self.nameTextField.text!
         place.detail = self.textView.text!
+        place.location = currentLocation
         
-        place.location = GeoPoint.geoPoint(
-            GEO_POINT(latitude: currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude),
-            categories: ["location"],
-            metadata: ["location": place]
-            ) as? GeoPoint
+        print("edit lat: \(place.location!.latitude), lon: \(place.location!.longitude)")
         
-        print("new lat: \(place.location!.latitude), lon: \(place.location!.longitude)")
-
-        
-        backendless.geoService.savePoint(
-            place.location,
-            response: { (let point : GeoPoint!) -> () in
+        dataStore.save(
+            place,
+            response: { (result: AnyObject!) -> Void in
                 self.indicator.hide();
+                StaticPlaces.sharedInstance.places![StaticPlaces.sharedInstance.selected] = (result as? Place)!
                 PecUtils.Alert(title: "Success", message: "Place saved successfully!")
                     .showSimple(self, callback: self.back)
             },
-            error: { (let fault : Fault!) -> () in
+            error: { (fault: Fault!) -> Void in
                 self.indicator.hide();
                 PecUtils.Alert(title: "Error", message: "Error saving the place.\n\(fault)")
                     .showSimple(self, callback: self.back)
-            }
-        )
+        })
+    }
+    
+    func delete() {
+        self.indicator.show(view)
+        let dataStore = Backendless.sharedInstance().data.of(Place.ofClass())
+        dataStore.remove(
+            chosenPlace,
+            response: { (result: AnyObject!) -> Void in
+                self.indicator.hide();
+                StaticPlaces.sharedInstance.places!.removeAtIndex(StaticPlaces.sharedInstance.selected)
+                StaticPlaces.sharedInstance.selected = -1
+                PecUtils.Alert(title: "Success", message: "Place deleted successfully!")
+                    .showSimple(self, callback: self.back)
+            },
+            error: { (fault: Fault!) -> Void in
+                self.indicator.hide();
+                PecUtils.Alert(title: "Error", message: "Error deleting the place.\n\(fault)")
+                    .showSimple(self, callback: self.back)
+        })
+    }
+    
+    @IBAction func onSave(sender: AnyObject) {
+        self.update()
+    }
+    @IBAction func onDelete(sender: AnyObject) {
+        self.delete()
     }
     
     private func back() -> Bool {

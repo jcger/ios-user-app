@@ -70,5 +70,6 @@ class ProfileViewController: UIViewController {
     @IBAction func logout(sender: AnyObject) {
         backendless.userService.logout()
         goToLogin()
+        self.finalize()
     }
 }

@@ -31,6 +31,7 @@
 		B9D7605C1CADBA8500D7AEB3 /* MediaLibiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D760421CADBA8500D7AEB3 /* MediaLibiOS.a */; };
 		B9D7605D1CADBA8500D7AEB3 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D7604D1CADBA8500D7AEB3 /* libspeex.a */; };
 		B9D7605E1CADBA8500D7AEB3 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D760531CADBA8500D7AEB3 /* libx264.a */; };
+		B9F4DF741CF1DF6100B017E2 /* MyPlacesEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F4DF731CF1DF6100B017E2 /* MyPlacesEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		B9D760501CADBA8500D7AEB3 /* x264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264.h; sourceTree = "<group>"; };
 		B9D760511CADBA8500D7AEB3 /* x264_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264_config.h; sourceTree = "<group>"; };
 		B9D760531CADBA8500D7AEB3 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
+		B9F4DF731CF1DF6100B017E2 /* MyPlacesEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,10 +258,11 @@
 				B9CD05A41CAEF2BC00C89CAD /* CreateAccountViewController.swift */,
 				B97C514C1CB2F08600D18BBA /* ProfileViewController.swift */,
 				B9124C031CBC48A500647B56 /* TermsViewController.swift */,
-				B9793B661CE8F60600207D05 /* MyPlacesDetailViewController.swift */,
-				B9D2B0621CEA085400B336F6 /* MyPlacesPhotosViewController.swift */,
 				B9695D611CB8708800C8DCB4 /* MyPlacesViewController.swift */,
 				B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */,
+				B9793B661CE8F60600207D05 /* MyPlacesDetailViewController.swift */,
+				B9D2B0621CEA085400B336F6 /* MyPlacesPhotosViewController.swift */,
+				B9F4DF731CF1DF6100B017E2 /* MyPlacesEditViewController.swift */,
 				B9078A191CB8731700537E1D /* MapViewController.swift */,
 				B9078A1C1CB8753500537E1D /* InformationViewController.swift */,
 				B9695D601CB83C7800C8DCB4 /* Bridging-Header.h */,
@@ -567,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F4DF741CF1DF6100B017E2 /* MyPlacesEditViewController.swift in Sources */,
 				B9CD05A51CAEF2BC00C89CAD /* CreateAccountViewController.swift in Sources */,
 				B9D75EAA1CADB4C100D7AEB3 /* LoginViewController.swift in Sources */,
 				B9695D621CB8708800C8DCB4 /* MyPlacesViewController.swift in Sources */,

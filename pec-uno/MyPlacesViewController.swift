@@ -17,6 +17,7 @@ public class Image: NSObject {
 }
 
 public class Place: NSObject {
+    public var ownerId: String?
     public var objectId: String?
     public var name: String?
     public var detail: String?
@@ -53,13 +54,11 @@ class MyPlacesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadUserPlaces()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -70,28 +69,31 @@ class MyPlacesViewController: UITableViewController {
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(revealViewController().panGestureRecognizer())
         }
+        StaticPlaces.sharedInstance.places = nil
+        self.loadUserPlaces()
     }
     
     private func loadUserPlaces() {
-        if (StaticPlaces.sharedInstance.places == nil) {
-            self.indicator.show(view);
-            currentUser = backendless.userService.currentUser
-            let dataQuery = BackendlessDataQuery()
-            let  queryOptions = QueryOptions()
-            queryOptions.relationsDepth = 1
-            dataQuery.whereClause = "ownerId = '\(currentUser!.objectId)'"
-            dataQuery.queryOptions = queryOptions
-        
-            var error: Fault?
-            let bc = backendless.data.of(Place.ofClass()).find(dataQuery, fault: &error)
-            if error == nil {
-                StaticPlaces.sharedInstance.places = bc.data as? [Place]
-                self.indicator.hide();
-            } else {
-                self.indicator.hide();
-                PecUtils.Alert(title: "Error", message: "Error loading places.\n\(error?.description)")
-                    .showSimple(self)
-            }
+        self.indicator.show(self.view);
+        currentUser = backendless.userService.currentUser
+        let dataQuery = BackendlessDataQuery()
+        let  queryOptions = QueryOptions()
+        queryOptions.relationsDepth = 1
+        dataQuery.whereClause = "ownerId = '\(currentUser!.objectId)'"
+        dataQuery.queryOptions = queryOptions
+    
+        var error: Fault?
+        let bc = backendless.data.of(Place.ofClass()).find(dataQuery, fault: &error)
+        if error == nil {
+            self.indicator.hide();
+            StaticPlaces.sharedInstance.places = bc.data as? [Place]
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
+        } else {
+            self.indicator.hide();
+            PecUtils.Alert(title: "Error", message: "Error loading places.\n\(error?.description)")
+                .showSimple(self)
         }
     }
 
@@ -109,8 +111,8 @@ class MyPlacesViewController: UITableViewController {
         let places = StaticPlaces.sharedInstance.places
         nameLabel.text = places![indexPath.item].name
         detailLabel.text = places![indexPath.item].detail
-        if (detailLabel.text?.characters.count > 15) {
-            detailLabel.text = (detailLabel.text! as NSString).substringToIndex(15) + "..."
+        if (detailLabel.text?.characters.count > 25) {
+            detailLabel.text = (detailLabel.text! as NSString).substringToIndex(25) + "..."
         }
         cell.addSubview(nameLabel)
         cell.addSubview(detailLabel)
