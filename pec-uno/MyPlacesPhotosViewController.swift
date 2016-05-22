@@ -38,7 +38,7 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
         
         currentImage = 0
         fetchImages()
-
+        imageView.userInteractionEnabled = true
     }
     
     private func openCamera() {
@@ -221,6 +221,21 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
             currentImage!++
             downloadImage(images![currentImage!].image!)
         }
+    }
+    
+    @IBAction func imageTapped(sender: UITapGestureRecognizer) {
+        let newImageView = UIImageView(image: imageView.image)
+        newImageView.frame = self.view.frame
+        newImageView.backgroundColor = .blackColor()
+        newImageView.contentMode = .ScaleAspectFit
+        newImageView.userInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: "dismissFullscreenImage:")
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+    }
+    
+    func dismissFullscreenImage(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
     }
 }
 

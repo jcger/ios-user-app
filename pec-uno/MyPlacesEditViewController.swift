@@ -139,8 +139,6 @@ class MyPlacesEditViewController: UIViewController, MKMapViewDelegate, CLLocatio
         place.detail = self.textView.text!
         place.location = currentLocation
         
-        print("edit lat: \(place.location!.latitude), lon: \(place.location!.longitude)")
-        
         dataStore.save(
             place,
             response: { (result: AnyObject!) -> Void in

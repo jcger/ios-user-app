@@ -49,7 +49,7 @@ class MyPlacesDetailViewController: UIViewController, MKMapViewDelegate {
         let latitude = CLLocationDegrees((chosenPlace?.location?.latitude)!)
         let longitude = CLLocationDegrees((chosenPlace?.location?.longitude)!)
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        print("detail lat: \(latitude), lon: \(longitude)")
+
         // Drop a pin
         let dropPin = MKPointAnnotation()
         dropPin.coordinate = location

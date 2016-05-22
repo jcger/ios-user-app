@@ -32,8 +32,6 @@
 		B9D7605D1CADBA8500D7AEB3 /* libspeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D7604D1CADBA8500D7AEB3 /* libspeex.a */; };
 		B9D7605E1CADBA8500D7AEB3 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D760531CADBA8500D7AEB3 /* libx264.a */; };
 		B9F4DF741CF1DF6100B017E2 /* MyPlacesEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F4DF731CF1DF6100B017E2 /* MyPlacesEditViewController.swift */; };
-		B9F4DF761CF21CD300B017E2 /* left.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F4DF751CF21CD300B017E2 /* left.png */; };
-		B9F4DF781CF21CD900B017E2 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = B9F4DF771CF21CD900B017E2 /* right.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,8 +174,6 @@
 		B9D760511CADBA8500D7AEB3 /* x264_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264_config.h; sourceTree = "<group>"; };
 		B9D760531CADBA8500D7AEB3 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
 		B9F4DF731CF1DF6100B017E2 /* MyPlacesEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesEditViewController.swift; sourceTree = "<group>"; };
-		B9F4DF751CF21CD300B017E2 /* left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left.png; sourceTree = "<group>"; };
-		B9F4DF771CF21CD900B017E2 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,10 +267,8 @@
 				B9078A1C1CB8753500537E1D /* InformationViewController.swift */,
 				B9695D601CB83C7800C8DCB4 /* Bridging-Header.h */,
 				B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */,
-				B9F4DF771CF21CD900B017E2 /* right.png */,
 				B9D75E971CADB13100D7AEB3 /* AppDelegate.swift */,
 				B9D75E9E1CADB13100D7AEB3 /* Assets.xcassets */,
-				B9F4DF751CF21CD300B017E2 /* left.png */,
 				B9D75EA01CADB13100D7AEB3 /* LaunchScreen.storyboard */,
 				B9D75EA31CADB13100D7AEB3 /* Info.plist */,
 			);
@@ -562,9 +556,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9F4DF781CF21CD900B017E2 /* right.png in Resources */,
 				B9124BFE1CBC484300647B56 /* terms.html in Resources */,
-				B9F4DF761CF21CD300B017E2 /* left.png in Resources */,
 				B9D75EA21CADB13100D7AEB3 /* LaunchScreen.storyboard in Resources */,
 				B9D75E9F1CADB13100D7AEB3 /* Assets.xcassets in Resources */,
 				B9D75E9D1CADB13100D7AEB3 /* Main.storyboard in Resources */,
