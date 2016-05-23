@@ -142,12 +142,6 @@ class MyPlacesPhotosViewController: UIViewController, UIImagePickerControllerDel
         self.openGallery()
     }
     
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data, response: response, error: error)
-            }.resume()
-    }
-    
     func downloadImage(fileUrl: String) {
         let this = self
         self.indicator.show(view);

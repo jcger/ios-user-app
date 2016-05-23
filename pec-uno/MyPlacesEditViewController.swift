@@ -9,7 +9,7 @@
 import Foundation
 import PecUtils
 
-class MyPlacesEditViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MyPlacesEditViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nameError: UILabel!

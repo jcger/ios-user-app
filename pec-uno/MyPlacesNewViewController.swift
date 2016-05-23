@@ -152,9 +152,6 @@ class MyPlacesNewViewController: UIViewController, MKMapViewDelegate, CLLocation
             metadata: ["location": place]
             ) as? GeoPoint
         
-        print("new lat: \(place.location!.latitude), lon: \(place.location!.longitude)")
-
-        
         backendless.geoService.savePoint(
             place.location,
             response: { (let point : GeoPoint!) -> () in
