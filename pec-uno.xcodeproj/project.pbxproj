@@ -10,6 +10,7 @@
 		B9078A1A1CB8731700537E1D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9078A191CB8731700537E1D /* MapViewController.swift */; };
 		B9078A1D1CB8753500537E1D /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9078A1C1CB8753500537E1D /* InformationViewController.swift */; };
 		B90DE22C1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */; };
+		B91101341D153F19001BAB0D /* MapCustumTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91101331D153F19001BAB0D /* MapCustumTableView.swift */; };
 		B9124BFE1CBC484300647B56 /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = B9124BFD1CBC484300647B56 /* terms.html */; };
 		B9124C041CBC48A500647B56 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9124C031CBC48A500647B56 /* TermsViewController.swift */; };
 		B9603AE41CB835240060CEB9 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9603AE31CB835240060CEB9 /* SWRevealViewController.m */; };
@@ -48,6 +49,7 @@
 		B9078A191CB8731700537E1D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B9078A1C1CB8753500537E1D /* InformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
 		B90DE22B1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPlacesNewViewController.swift; sourceTree = "<group>"; };
+		B91101331D153F19001BAB0D /* MapCustumTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCustumTableView.swift; sourceTree = "<group>"; };
 		B9124BFD1CBC484300647B56 /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
 		B9124C031CBC48A500647B56 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		B9603AE21CB835240060CEB9 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				B9D2B0621CEA085400B336F6 /* MyPlacesPhotosViewController.swift */,
 				B9F4DF731CF1DF6100B017E2 /* MyPlacesEditViewController.swift */,
 				B9078A191CB8731700537E1D /* MapViewController.swift */,
+				B91101331D153F19001BAB0D /* MapCustumTableView.swift */,
 				B9078A1C1CB8753500537E1D /* InformationViewController.swift */,
 				B9695D601CB83C7800C8DCB4 /* Bridging-Header.h */,
 				B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */,
@@ -579,6 +582,7 @@
 				B9124C041CBC48A500647B56 /* TermsViewController.swift in Sources */,
 				B90DE22C1CDFBE1200DD35D7 /* MyPlacesNewViewController.swift in Sources */,
 				B97C514D1CB2F08600D18BBA /* ProfileViewController.swift in Sources */,
+				B91101341D153F19001BAB0D /* MapCustumTableView.swift in Sources */,
 				B9D75E981CADB13100D7AEB3 /* AppDelegate.swift in Sources */,
 				B9793B671CE8F60600207D05 /* MyPlacesDetailViewController.swift in Sources */,
 				B9078A1A1CB8731700537E1D /* MapViewController.swift in Sources */,

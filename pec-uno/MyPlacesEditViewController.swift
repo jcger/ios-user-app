@@ -105,7 +105,6 @@ class MyPlacesEditViewController: UIViewController, MKMapViewDelegate {
         return true
     }
     
-    
     /* hides all the error labels */
     private func resetErrorHighlight() {
         nameError.hidden = true

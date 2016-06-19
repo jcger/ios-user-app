@@ -81,7 +81,7 @@ class MyPlacesViewController: UITableViewController {
         queryOptions.relationsDepth = 1
         dataQuery.whereClause = "ownerId = '\(currentUser!.objectId)'"
         dataQuery.queryOptions = queryOptions
-    
+        
         var error: Fault?
         let bc = backendless.data.of(Place.ofClass()).find(dataQuery, fault: &error)
         if error == nil {
