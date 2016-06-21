@@ -1201,24 +1201,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ft7-eA-xCZ">
-                                <rect key="frame" x="0.0" y="64" width="600" height="360"/>
-                            </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AWp-4Y-Vfg">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="102" width="600" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="O07-ES-plJ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="256"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="AWp-4Y-Vfg" firstAttribute="leading" secondItem="zU5-0e-rAh" secondAttribute="leading" id="6m2-xk-Syh"/>
-                            <constraint firstItem="189-Tp-A99" firstAttribute="top" secondItem="Ft7-eA-xCZ" secondAttribute="bottom" constant="176" id="Adc-Ia-XxA"/>
-                            <constraint firstItem="AWp-4Y-Vfg" firstAttribute="trailing" secondItem="Ft7-eA-xCZ" secondAttribute="trailing" id="KzT-Tl-pJu"/>
-                            <constraint firstItem="Ft7-eA-xCZ" firstAttribute="top" secondItem="AWp-4Y-Vfg" secondAttribute="top" id="LS1-zR-tzi"/>
-                            <constraint firstItem="Ft7-eA-xCZ" firstAttribute="top" secondItem="gi2-FD-B9m" secondAttribute="bottom" id="YIR-Xg-ar5"/>
-                            <constraint firstItem="AWp-4Y-Vfg" firstAttribute="bottom" secondItem="189-Tp-A99" secondAttribute="top" id="aXl-Te-ehq"/>
-                            <constraint firstItem="Ft7-eA-xCZ" firstAttribute="leading" secondItem="AWp-4Y-Vfg" secondAttribute="leading" id="axR-SV-V9T"/>
-                            <constraint firstAttribute="trailing" secondItem="AWp-4Y-Vfg" secondAttribute="trailing" id="exj-F0-bZr"/>
+                            <constraint firstItem="O07-ES-plJ" firstAttribute="leading" secondItem="AWp-4Y-Vfg" secondAttribute="leading" id="5O9-nh-wVd"/>
+                            <constraint firstItem="AWp-4Y-Vfg" firstAttribute="bottom" secondItem="189-Tp-A99" secondAttribute="top" id="7hD-gy-gRw"/>
+                            <constraint firstItem="AWp-4Y-Vfg" firstAttribute="trailing" secondItem="O07-ES-plJ" secondAttribute="trailing" id="7zc-mD-yIZ"/>
+                            <constraint firstItem="O07-ES-plJ" firstAttribute="top" secondItem="gi2-FD-B9m" secondAttribute="bottom" id="JYV-8d-dE2"/>
+                            <constraint firstItem="O07-ES-plJ" firstAttribute="leading" secondItem="zU5-0e-rAh" secondAttribute="leading" id="XTq-kA-P7v"/>
+                            <constraint firstItem="AWp-4Y-Vfg" firstAttribute="top" secondItem="gi2-FD-B9m" secondAttribute="bottom" constant="38" id="jEa-bT-Dhy"/>
+                            <constraint firstItem="189-Tp-A99" firstAttribute="top" secondItem="O07-ES-plJ" secondAttribute="bottom" constant="280" id="y5c-Ib-hS7"/>
+                            <constraint firstAttribute="trailing" secondItem="O07-ES-plJ" secondAttribute="trailing" id="yf3-zU-dRI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="pLf-0m-FpJ">
@@ -1227,14 +1227,33 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="Ft7-eA-xCZ" id="lSl-lM-zrO"/>
+                        <outlet property="mapView" destination="O07-ES-plJ" id="Tnt-KE-WJ5"/>
                         <outlet property="menuButton" destination="5i1-hg-FIO" id="GWb-Zz-4K1"/>
                         <outlet property="tableView" destination="AWp-4Y-Vfg" id="BTY-vP-eUJ"/>
+                        <segue destination="ehT-Lp-nWQ" kind="show" id="pYs-VL-VkW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3v-dr-Tpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="992" y="2940"/>
+        </scene>
+        <!--Map Place Detail-->
+        <scene sceneID="ZJj-4W-aId">
+            <objects>
+                <viewController id="ehT-Lp-nWQ" customClass="MapPlaceDetail" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2AV-oQ-Gwo"/>
+                        <viewControllerLayoutGuide type="bottom" id="gGX-ui-9y9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AED-Qc-rA4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R75-Mq-NAR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1733" y="2941"/>
         </scene>
         <!--Terms View Controller-->
         <scene sceneID="erI-pL-ACe">

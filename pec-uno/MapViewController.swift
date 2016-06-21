@@ -10,6 +10,26 @@ import UIKit
 import MapKit
 import PecUtils
 
+public class StaticAllPlaces: NSObject {
+    public class var sharedInstance: StaticAllPlaces {
+        struct Static {
+            static var instance: StaticAllPlaces?
+            static var token: dispatch_once_t = 0
+        }
+        
+        dispatch_once(&Static.token) {
+            Static.instance = StaticAllPlaces()
+        }
+        
+        return Static.instance!
+    }
+    public var places: Array<Place>?
+    public var selected: Int = -1
+    public func addPlace(place: Place) {
+        self.places?.append(place)
+    }
+}
+
 var tableView: UITableView!
 
 class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, MKMapViewDelegate  {
@@ -23,7 +43,6 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
     private let backendless = Backendless.sharedInstance()
     private var indicator = PecUtils.Indicator()
     private var DEFAULT_RADIUS_KM: Double = 100
-    private var places: [Place] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +51,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         self.tableView.backgroundColor = UIColor.clearColor();
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
+        self.tableView.rowHeight = 70.0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -46,6 +66,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         mapView.delegate = self
         mapView.mapType = MKMapType.Standard
         self.startRequestingLocation()
+        StaticAllPlaces.sharedInstance.places = nil
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,20 +91,6 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
             self.stopRequestingLocation()
             loadGeoPointsAsync(self.DEFAULT_RADIUS_KM)
         }
-    }
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKPointAnnotation {
-            let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myPin")
-            
-            pinAnnotationView.draggable = true
-            pinAnnotationView.canShowCallout = true
-            pinAnnotationView.animatesDrop = true
-            
-            return pinAnnotationView
-        }
-        
-        return nil
     }
     
     private func startRequestingLocation() {
@@ -122,10 +129,14 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         }
         
         let geoPoints = points.getCurrentPage() as! [GeoPoint]
+        var places: [Place] = []
         for geoPoint in geoPoints {
-            let place = geoPoint.metadata["location"] as! Place
-            self.places.append(place)
+            let place = geoPoint.metadata["location"] as? Place
+            if (place !== nil) {
+                places.append(place!)
+            }
         }
+        StaticAllPlaces.sharedInstance.places = places
         
         points.nextPageAsync(
             { (let rest : BackendlessCollection!) -> () in
@@ -138,7 +149,25 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.tableView.reloadData()
-        })
+            self.loadAnnotations()
+            self.zoomToFitMapAnnotations()
+        })        
+    }
+    
+    func loadAnnotations() {
+        if (StaticAllPlaces.sharedInstance.places == nil) {
+            return
+        }
+        for place in StaticAllPlaces.sharedInstance.places! {
+            let latitude = CLLocationDegrees((place.location?.latitude)!)
+            let longitude = CLLocationDegrees((place.location?.longitude)!)
+            let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            // Drop a pin
+            let dropPin = MKPointAnnotation()
+            dropPin.coordinate = location
+            dropPin.title = place.name
+            mapView.addAnnotation(dropPin)
+        }
     }
 
     func loadGeoPointsAsync(radius:Double) {
@@ -165,6 +194,32 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         )
     }
     
+    func zoomToFitMapAnnotations() {
+        if StaticAllPlaces.sharedInstance.places == nil {
+            return
+        }
+        var topLeftCoord: CLLocationCoordinate2D = CLLocationCoordinate2D()
+        topLeftCoord.latitude = -90
+        topLeftCoord.longitude = 180
+        var bottomRightCoord: CLLocationCoordinate2D = CLLocationCoordinate2D()
+        bottomRightCoord.latitude = 90
+        bottomRightCoord.longitude = -180
+        for annotation: MKAnnotation in mapView.annotations {
+            topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude)
+            topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude)
+            bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, annotation.coordinate.longitude)
+            bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, annotation.coordinate.latitude)
+        }
+        
+        var region: MKCoordinateRegion = MKCoordinateRegion()
+        region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5
+        region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5
+        region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.4
+        region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.4
+        region = mapView.regionThatFits(region)
+        mapView.setRegion(region, animated: true)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tableView.contentInset = UIEdgeInsetsMake(self.mapView.frame.size.height-40, 0, 0, 0);
@@ -177,14 +232,36 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.places.count
+        if (StaticAllPlaces.sharedInstance.places == nil) {
+            return 0
+        }
+        return StaticAllPlaces.sharedInstance.places!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell? = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell?
+        let cell = UITableViewCell()
+        let nameLabel = UILabel(frame: CGRect(x:15, y:5, width:200, height:35))
+        let detailLabel = UILabel(frame: CGRect(x:15, y:35, width:200, height:35))
+        nameLabel.text = StaticAllPlaces.sharedInstance.places![indexPath.item].name
+        detailLabel.text = StaticAllPlaces.sharedInstance.places![indexPath.item].detail
+        if (detailLabel.text?.characters.count > 25) {
+            detailLabel.text = (detailLabel.text! as NSString).substringToIndex(25) + "..."
+        }
+        cell.addSubview(nameLabel)
+        cell.addSubview(detailLabel)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        cell?.textLabel?.text = self.places[indexPath.row].name
+        let row = indexPath.row
+        StaticAllPlaces.sharedInstance.selected = row
+        mapView.selectAnnotation(mapView.annotations[row], animated: true)
         
-        return cell!
+//        let MyPlacesDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MyPlacesDetail") as UIViewController
+        
+//        self.navigationController!.pushViewController(MyPlacesDetailViewController, animated: true)
+        
     }
 }
