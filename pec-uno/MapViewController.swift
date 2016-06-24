@@ -30,6 +30,12 @@ public class StaticAllPlaces: NSObject {
     }
 }
 
+public class Rating: NSObject {
+    public var rating: Int = 0
+    public var user: String?
+    public var place: String?
+}
+
 var tableView: UITableView!
 
 class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, MKMapViewDelegate  {
@@ -42,7 +48,8 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
     private var currentLocation: CLLocation!
     private let backendless = Backendless.sharedInstance()
     private var indicator = PecUtils.Indicator()
-    private var DEFAULT_RADIUS_KM: Double = 100
+    private var radius: Double = 100
+    private var radiusTextField: UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +72,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         
         mapView.delegate = self
         mapView.mapType = MKMapType.Standard
+        mapView.showsUserLocation = true
         self.startRequestingLocation()
         StaticAllPlaces.sharedInstance.places = nil
     }
@@ -89,7 +97,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
             
             self.mapView.setRegion(region, animated: true)
             self.stopRequestingLocation()
-            loadGeoPointsAsync(self.DEFAULT_RADIUS_KM)
+            self.loadGeoPointsAsync(self.radius)
         }
     }
     
@@ -137,21 +145,9 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
             }
         }
         StaticAllPlaces.sharedInstance.places = places
+        self.indicator.hide()
         
-        points.nextPageAsync(
-            { (let rest : BackendlessCollection!) -> () in
-                self.nextPageAsync(rest)
-            },
-            error: { (let fault : Fault!) -> () in
-                print("Server reported an error: \(fault)")
-            }
-        )
-        
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.tableView.reloadData()
-            self.loadAnnotations()
-            self.zoomToFitMapAnnotations()
-        })        
+        self.loadRatings()
     }
     
     func loadAnnotations() {
@@ -172,6 +168,11 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
 
     func loadGeoPointsAsync(radius:Double) {
         
+        StaticAllPlaces.sharedInstance.places = []
+        let annotationsToRemove = mapView.annotations.filter { $0 !== mapView.userLocation }
+        mapView.removeAnnotations( annotationsToRemove )
+        
+        self.indicator.show(view)
         let query = BackendlessGeoQuery.queryWithPoint(
             GEO_POINT(latitude: currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude),
             radius: radius, units: KILOMETERS,
@@ -190,6 +191,24 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
                 PecUtils.Alert(title: "Error", message: "Error retrieving the places.")
                     .showSimple(self)
                 print("Error! \(fault)")
+            }
+        )
+    }
+    
+    func loadRatings() {
+        let query = BackendlessDataQuery()
+        backendless.persistenceService.of(Rating.ofClass()).find(
+            query,
+            response: { ( ratings : BackendlessCollection!) -> () in
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData()
+                    self.loadAnnotations()
+                    self.zoomToFitMapAnnotations()
+                })
+            },
+            error: { ( fault : Fault!) -> () in
+                print("Server reported an error: \(fault)")
             }
         )
     }
@@ -257,11 +276,28 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         
         let row = indexPath.row
         StaticAllPlaces.sharedInstance.selected = row
-        mapView.selectAnnotation(mapView.annotations[row], animated: true)
         
-//        let MyPlacesDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MyPlacesDetail") as UIViewController
+        let MyPlacesDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MapPlaceDetailView") as UIViewController
         
-//        self.navigationController!.pushViewController(MyPlacesDetailViewController, animated: true)
+        self.navigationController!.pushViewController(MyPlacesDetailViewController, animated: true)
         
+    }
+    
+    @IBAction func onOptionsClick(sender: AnyObject) {
+        let alert = UIAlertController(title: "Options", message: "Choose the search radius", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            let radius: String = (self.radiusTextField?.text)!
+            
+            if (radius != "") {
+                self.radius = Double(radius)!
+            }
+            self.loadGeoPointsAsync(self.radius)
+        }))
+        
+        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.placeholder = String(self.radius)
+            self.radiusTextField = textField
+        })
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+
 class MapCustomTableViewController: UITableView, UITableViewDelegate {
     
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
