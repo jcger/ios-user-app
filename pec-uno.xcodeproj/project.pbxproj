@@ -38,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B9191E2F1D1DC23B00AD873A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B9CAE79C1CB1248A00D215E6;
+			remoteInfo = PecUtils;
+		};
 		B97C514A1CB2D1BA00D18BBA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B9CAE7A81CB1248A00D215E6 /* PecUtils.xcodeproj */;
@@ -505,6 +512,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B9191E301D1DC23B00AD873A /* PBXTargetDependency */,
 			);
 			name = "pec-uno";
 			productName = "pec-uno";
@@ -599,6 +607,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B9191E301D1DC23B00AD873A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PecUtils;
+			targetProxy = B9191E2F1D1DC23B00AD873A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B9D75E9B1CADB13100D7AEB3 /* Main.storyboard */ = {

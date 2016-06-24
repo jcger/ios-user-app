@@ -9,7 +9,7 @@
 import Foundation
 import PecUtils
 
-class MapPlacesPhotosViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MapPlacesPhotosViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -39,7 +39,6 @@ class MapPlacesPhotosViewController: UIViewController, UIImagePickerControllerDe
         }
 
         chosenPlace = StaticAllPlaces.sharedInstance.places![StaticAllPlaces.sharedInstance.selected]
-        print(chosenPlace)
         nameLabel.text = chosenPlace!.name
         
         currentImage = 0

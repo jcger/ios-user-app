@@ -286,7 +286,11 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
             }
         }
         let name = StaticAllPlaces.sharedInstance.places![indexPath.item].name
-        nameLabel.text = "\(name!) - Rating: \(Int(userRating/nrRating))"
+        if (nrRating > 0) {
+            nameLabel.text = "\(name!) - Rating: \(Int(userRating/nrRating))"
+        } else {
+            nameLabel.text = name
+        }
         if (detailLabel.text?.characters.count > 25) {
             detailLabel.text = (detailLabel.text! as NSString).substringToIndex(25) + "..."
         }
