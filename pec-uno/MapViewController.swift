@@ -50,6 +50,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
     private var indicator = PecUtils.Indicator()
     private var radius: Double = 100
     private var radiusTextField: UITextField?
+    private var ratings: [Rating] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,10 +159,21 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
             let latitude = CLLocationDegrees((place.location?.latitude)!)
             let longitude = CLLocationDegrees((place.location?.longitude)!)
             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            
+            var userRating: Int = 0
+            var nrRating: Int = 0
+            
+            for rating in self.ratings {
+                if (rating.place == place.objectId) {
+                    userRating += rating.rating
+                    nrRating++
+                }
+            }
+            
             // Drop a pin
             let dropPin = MKPointAnnotation()
             dropPin.coordinate = location
-            dropPin.title = place.name
+            dropPin.title = "\(place.name!) - Rating: \(String(Int(userRating/nrRating)))"
             mapView.addAnnotation(dropPin)
         }
     }
@@ -200,6 +212,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         backendless.persistenceService.of(Rating.ofClass()).find(
             query,
             response: { ( ratings : BackendlessCollection!) -> () in
+                self.ratings = ratings.getCurrentPage() as! [Rating]
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.tableView.reloadData()
@@ -261,8 +274,19 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
         let cell = UITableViewCell()
         let nameLabel = UILabel(frame: CGRect(x:15, y:5, width:200, height:35))
         let detailLabel = UILabel(frame: CGRect(x:15, y:35, width:200, height:35))
-        nameLabel.text = StaticAllPlaces.sharedInstance.places![indexPath.item].name
         detailLabel.text = StaticAllPlaces.sharedInstance.places![indexPath.item].detail
+        
+        var userRating: Int = 0
+        var nrRating: Int = 0
+        
+        for rating in self.ratings {
+            if (rating.place == StaticAllPlaces.sharedInstance.places![indexPath.item].objectId) {
+                userRating += rating.rating
+                nrRating++
+            }
+        }
+        let name = StaticAllPlaces.sharedInstance.places![indexPath.item].name
+        nameLabel.text = "\(name!) - Rating: \(Int(userRating/nrRating))"
         if (detailLabel.text?.characters.count > 25) {
             detailLabel.text = (detailLabel.text! as NSString).substringToIndex(25) + "..."
         }
@@ -284,7 +308,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, UITableViewDele
     }
     
     @IBAction func onOptionsClick(sender: AnyObject) {
-        let alert = UIAlertController(title: "Options", message: "Choose the search radius", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Options", message: "Search radius (km)", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
             let radius: String = (self.radiusTextField?.text)!
             

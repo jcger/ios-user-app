@@ -19,7 +19,7 @@ class MapPlaceDetailViewController: UIViewController, MKMapViewDelegate {
     private let backendless = Backendless.sharedInstance()
     private var chosenPlace: Place?
     private var indicator = PecUtils.Indicator()
-    private let placeRating = 0
+    private var placeRating:Int = 0
     private let regionRadius: CLLocationDistance = 1000
     private var currentUser: BackendlessUser?
     private var userRatings: [Rating] = []
@@ -57,8 +57,9 @@ class MapPlaceDetailViewController: UIViewController, MKMapViewDelegate {
         
         // Drop a pin
         let dropPin = MKPointAnnotation()
+        let name = chosenPlace?.name
         dropPin.coordinate = location
-        dropPin.title = "\(chosenPlace?.name!) \(self.placeRating)/5"
+        dropPin.title = "\(name!) - Rating:\(self.placeRating)"
         mapView.addAnnotation(dropPin)
         centerMapOnLocation(location)
     }
@@ -104,8 +105,9 @@ class MapPlaceDetailViewController: UIViewController, MKMapViewDelegate {
             for rate in self.userRatings {
                 rating += rate.rating
             }
+            self.placeRating = Int(rating/bc.data.count)
             if (bc.data.count > 0) {
-                nameLabel.text = "\(chosenPlace!.name!) (\(Int(rating/bc.data.count))/5)"
+                nameLabel.text = "\(chosenPlace!.name!) (\(self.placeRating)/5)"
             } else {
                 nameLabel.text = "\(chosenPlace!.name!)"
             }
